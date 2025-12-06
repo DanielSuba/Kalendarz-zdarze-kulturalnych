@@ -1,0 +1,12 @@
+D:\licznoe\Projects\Gl projekt\Kalendarz zdarzen kulturalnych\Kalendarz zdarzen kulturalnych\bin\Debug\Kalendarz zdarzen kulturalnych.exe.config
+D:\licznoe\Projects\Gl projekt\Kalendarz zdarzen kulturalnych\Kalendarz zdarzen kulturalnych\bin\Debug\Kalendarz zdarzen kulturalnych.exe
+D:\licznoe\Projects\Gl projekt\Kalendarz zdarzen kulturalnych\Kalendarz zdarzen kulturalnych\bin\Debug\Kalendarz zdarzen kulturalnych.pdb
+D:\licznoe\Projects\Gl projekt\Kalendarz zdarzen kulturalnych\Kalendarz zdarzen kulturalnych\obj\Debug\Kalendarz zdarzen kulturalnych.csproj.AssemblyReference.cache
+D:\licznoe\Projects\Gl projekt\Kalendarz zdarzen kulturalnych\Kalendarz zdarzen kulturalnych\obj\Debug\Kalendarz_zdarzen_kulturalnych.Form1.resources
+D:\licznoe\Projects\Gl projekt\Kalendarz zdarzen kulturalnych\Kalendarz zdarzen kulturalnych\obj\Debug\Kalendarz_zdarzen_kulturalnych.Properties.Resources.resources
+D:\licznoe\Projects\Gl projekt\Kalendarz zdarzen kulturalnych\Kalendarz zdarzen kulturalnych\obj\Debug\Kalendarz zdarzen kulturalnych.csproj.GenerateResource.cache
+D:\licznoe\Projects\Gl projekt\Kalendarz zdarzen kulturalnych\Kalendarz zdarzen kulturalnych\obj\Debug\Kalendarz zdarzen kulturalnych.csproj.CoreCompileInputs.cache
+D:\licznoe\Projects\Gl projekt\Kalendarz zdarzen kulturalnych\Kalendarz zdarzen kulturalnych\obj\Debug\Kalendarz zdarzen kulturalnych.exe
+D:\licznoe\Projects\Gl projekt\Kalendarz zdarzen kulturalnych\Kalendarz zdarzen kulturalnych\obj\Debug\Kalendarz zdarzen kulturalnych.pdb
+D:\licznoe\Projects\Gl projekt\Kalendarz zdarzen kulturalnych\Kalendarz zdarzen kulturalnych\obj\Debug\Kalendarz_zdarzen_kulturalnych.Day.resources
+D:\licznoe\Projects\Gl projekt\Kalendarz zdarzen kulturalnych\Kalendarz zdarzen kulturalnych\obj\Debug\Kalendarz_zdarzen_kulturalnych.Form2.resources
