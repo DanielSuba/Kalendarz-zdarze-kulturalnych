@@ -13,6 +13,12 @@ namespace Kalendarz_zdarzen_kulturalnych
     public partial class Form2 : Form
     {
         bool isDeleting = false;
+        public string EventTitle { get; set; }
+        public string EventDate { get; set; }
+        public string EventTime { get; set; }
+        public string EventLocation { get; set; }
+        public string EventType { get; set; }
+        public string EventCost { get; set; }
         public Form2()
         {
             InitializeComponent();
@@ -21,6 +27,16 @@ namespace Kalendarz_zdarzen_kulturalnych
         private void Newevent_Click(object sender, EventArgs e)
         {
 
+
+            EventTitle = Event_title.Text;
+            EventDate = textBox7.Text;
+            EventTime = txtTime.Text;
+            EventLocation = txt_Location.Text;
+            EventType = txt_Type.Text;
+            EventCost = txt_Cost.Text;
+
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private void textBox7_Click(object sender, EventArgs e)
@@ -91,6 +107,11 @@ namespace Kalendarz_zdarzen_kulturalnych
         private void txtTime_KeyDown(object sender, KeyEventArgs e)
         {
             isDeleting = e.KeyCode == Keys.Back;
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

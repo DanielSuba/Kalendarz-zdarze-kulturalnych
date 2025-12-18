@@ -109,8 +109,15 @@ namespace Kalendarz_zdarzen_kulturalnych
 
         private void Add_event_Click(object sender, EventArgs e)
         {
-            Form2 newWindow = new Form2();
-            newWindow.Show();
+            using (Form2 f2 = new Form2())
+            {
+                if (f2.ShowDialog() == DialogResult.OK)
+                {
+                    dgvEvents.Rows.Add(f2.EventTitle, f2.EventDate, f2.EventLocation, f2.EventType, f2.EventCost);
+                }
+            }
+            //Form2 newWindow = new Form2();
+            //newWindow.Show();
         }
 
         private void Check_day_Click(object sender, EventArgs e)
@@ -142,6 +149,21 @@ namespace Kalendarz_zdarzen_kulturalnych
         private void dgvEvents_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void Delete_Event_Click(object sender, EventArgs e)
+        {
+            if (dgvEvents.SelectedRows.Count > 0)
+            {
+                foreach (DataGridViewRow row in dgvEvents.SelectedRows)
+                {
+                    dgvEvents.Rows.Remove(row);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a full row to delete.");
+            }
         }
     }
 }

@@ -42,9 +42,9 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.Event_title = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.txtTime = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.txt_Location = new System.Windows.Forms.TextBox();
+            this.txt_Type = new System.Windows.Forms.TextBox();
+            this.txt_Cost = new System.Windows.Forms.TextBox();
             this.Back = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.Description = new System.Windows.Forms.RichTextBox();
@@ -209,35 +209,35 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.txtTime.Leave += new System.EventHandler(this.txtTime_Leave);
             this.txtTime.Validating += new System.ComponentModel.CancelEventHandler(this.txtTime_Validating);
             // 
-            // textBox9
+            // txt_Location
             // 
-            this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox9.ForeColor = System.Drawing.Color.Black;
-            this.textBox9.Location = new System.Drawing.Point(127, 194);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(190, 26);
-            this.textBox9.TabIndex = 29;
+            this.txt_Location.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_Location.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Location.ForeColor = System.Drawing.Color.Black;
+            this.txt_Location.Location = new System.Drawing.Point(127, 194);
+            this.txt_Location.Name = "txt_Location";
+            this.txt_Location.Size = new System.Drawing.Size(190, 26);
+            this.txt_Location.TabIndex = 29;
             // 
-            // textBox10
+            // txt_Type
             // 
-            this.textBox10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox10.ForeColor = System.Drawing.Color.Black;
-            this.textBox10.Location = new System.Drawing.Point(127, 223);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(190, 26);
-            this.textBox10.TabIndex = 30;
+            this.txt_Type.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_Type.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Type.ForeColor = System.Drawing.Color.Black;
+            this.txt_Type.Location = new System.Drawing.Point(127, 223);
+            this.txt_Type.Name = "txt_Type";
+            this.txt_Type.Size = new System.Drawing.Size(190, 26);
+            this.txt_Type.TabIndex = 30;
             // 
-            // textBox11
+            // txt_Cost
             // 
-            this.textBox11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox11.ForeColor = System.Drawing.Color.Black;
-            this.textBox11.Location = new System.Drawing.Point(127, 252);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(190, 26);
-            this.textBox11.TabIndex = 31;
+            this.txt_Cost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_Cost.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Cost.ForeColor = System.Drawing.Color.Black;
+            this.txt_Cost.Location = new System.Drawing.Point(127, 252);
+            this.txt_Cost.Name = "txt_Cost";
+            this.txt_Cost.Size = new System.Drawing.Size(190, 26);
+            this.txt_Cost.TabIndex = 31;
             // 
             // Back
             // 
@@ -289,9 +289,9 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.Controls.Add(this.Description);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.Back);
-            this.Controls.Add(this.textBox11);
-            this.Controls.Add(this.textBox10);
-            this.Controls.Add(this.textBox9);
+            this.Controls.Add(this.txt_Cost);
+            this.Controls.Add(this.txt_Type);
+            this.Controls.Add(this.txt_Location);
             this.Controls.Add(this.txtTime);
             this.Controls.Add(this.textBox7);
             this.Controls.Add(this.Event_title);
@@ -307,6 +307,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.Controls.Add(this.pictureBox1);
             this.Name = "Form2";
             this.Text = "Form2";
+            this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.des1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -330,9 +331,9 @@ namespace Kalendarz_zdarzen_kulturalnych
         private System.Windows.Forms.TextBox Event_title;
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.TextBox txtTime;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.TextBox txt_Location;
+        private System.Windows.Forms.TextBox txt_Type;
+        private System.Windows.Forms.TextBox txt_Cost;
         private System.Windows.Forms.Button Back;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.RichTextBox Description;

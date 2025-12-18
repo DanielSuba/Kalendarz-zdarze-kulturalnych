@@ -31,6 +31,7 @@ namespace Kalendarz_zdarzen_kulturalnych
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Import = new System.Windows.Forms.Button();
             this.Cultural_Events_Calendar = new System.Windows.Forms.TextBox();
             this.des1 = new System.Windows.Forms.PictureBox();
@@ -71,6 +72,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.colLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EksportCal = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.des1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -270,7 +272,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.Upcoming_Events.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Upcoming_Events.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Upcoming_Events.ForeColor = System.Drawing.Color.White;
-            this.Upcoming_Events.Location = new System.Drawing.Point(508, 103);
+            this.Upcoming_Events.Location = new System.Drawing.Point(930, 103);
             this.Upcoming_Events.Name = "Upcoming_Events";
             this.Upcoming_Events.Size = new System.Drawing.Size(158, 40);
             this.Upcoming_Events.TabIndex = 15;
@@ -285,7 +287,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.Past_Events.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Past_Events.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Past_Events.ForeColor = System.Drawing.Color.Black;
-            this.Past_Events.Location = new System.Drawing.Point(672, 103);
+            this.Past_Events.Location = new System.Drawing.Point(1094, 103);
             this.Past_Events.Name = "Past_Events";
             this.Past_Events.Size = new System.Drawing.Size(158, 40);
             this.Past_Events.TabIndex = 16;
@@ -349,6 +351,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.Delete_Event.TabIndex = 20;
             this.Delete_Event.Text = "Delete Event";
             this.Delete_Event.UseVisualStyleBackColor = false;
+            this.Delete_Event.Click += new System.EventHandler(this.Delete_Event_Click);
             // 
             // pictureBox2
             // 
@@ -516,16 +519,24 @@ namespace Kalendarz_zdarzen_kulturalnych
             // 
             // dgvEvents
             // 
+            this.dgvEvents.AllowUserToAddRows = false;
+            this.dgvEvents.AllowUserToDeleteRows = false;
+            this.dgvEvents.AllowUserToResizeColumns = false;
+            this.dgvEvents.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvEvents.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvEvents.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEvents.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvEvents.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEvents.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvEvents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEvents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colTitle,
@@ -533,11 +544,11 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.colLocation,
             this.colType,
             this.colCost});
-            this.dgvEvents.Location = new System.Drawing.Point(247, 215);
+            this.dgvEvents.Location = new System.Drawing.Point(247, 218);
             this.dgvEvents.Name = "dgvEvents";
             this.dgvEvents.RowTemplate.Height = 30;
             this.dgvEvents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvEvents.Size = new System.Drawing.Size(1005, 395);
+            this.dgvEvents.Size = new System.Drawing.Size(1005, 392);
             this.dgvEvents.TabIndex = 36;
             this.dgvEvents.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEvents_CellContentClick);
             // 
@@ -576,12 +587,27 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.colCost.Name = "colCost";
             this.colCost.ReadOnly = true;
             // 
+            // EksportCal
+            // 
+            this.EksportCal.BackColor = System.Drawing.Color.DodgerBlue;
+            this.EksportCal.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.EksportCal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.EksportCal.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EksportCal.ForeColor = System.Drawing.Color.White;
+            this.EksportCal.Location = new System.Drawing.Point(411, 103);
+            this.EksportCal.Name = "EksportCal";
+            this.EksportCal.Size = new System.Drawing.Size(158, 40);
+            this.EksportCal.TabIndex = 37;
+            this.EksportCal.Text = "Export calendar";
+            this.EksportCal.UseVisualStyleBackColor = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.EksportCal);
             this.Controls.Add(this.dgvEvents);
             this.Controls.Add(this.pictureBox8);
             this.Controls.Add(this.pictureBox7);
@@ -677,6 +703,7 @@ namespace Kalendarz_zdarzen_kulturalnych
         private System.Windows.Forms.DataGridViewTextBoxColumn colLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn colType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCost;
+        private System.Windows.Forms.Button EksportCal;
     }
 }
 
