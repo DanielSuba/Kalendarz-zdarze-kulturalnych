@@ -138,5 +138,10 @@ namespace Kalendarz_zdarzen_kulturalnych
         {
 
         }
+
+        private void dgvEvents_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

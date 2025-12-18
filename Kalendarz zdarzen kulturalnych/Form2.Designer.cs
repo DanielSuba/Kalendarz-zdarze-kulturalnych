@@ -41,13 +41,17 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.Event_title = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.txtTime = new System.Windows.Forms.TextBox();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.textBox11 = new System.Windows.Forms.TextBox();
             this.Back = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.Description = new System.Windows.Forms.RichTextBox();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             ((System.ComponentModel.ISupportInitialize)(this.des1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // des1
@@ -185,18 +189,25 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.textBox7.ForeColor = System.Drawing.Color.Black;
             this.textBox7.Location = new System.Drawing.Point(127, 136);
             this.textBox7.Name = "textBox7";
+            this.textBox7.ReadOnly = true;
             this.textBox7.Size = new System.Drawing.Size(190, 26);
             this.textBox7.TabIndex = 27;
+            this.textBox7.Click += new System.EventHandler(this.textBox7_Click);
             // 
-            // textBox8
+            // txtTime
             // 
-            this.textBox8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox8.ForeColor = System.Drawing.Color.Black;
-            this.textBox8.Location = new System.Drawing.Point(127, 165);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(190, 26);
-            this.textBox8.TabIndex = 28;
+            this.txtTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTime.ForeColor = System.Drawing.Color.Black;
+            this.txtTime.Location = new System.Drawing.Point(127, 165);
+            this.txtTime.MaxLength = 5;
+            this.txtTime.Name = "txtTime";
+            this.txtTime.Size = new System.Drawing.Size(190, 26);
+            this.txtTime.TabIndex = 28;
+            this.txtTime.TextChanged += new System.EventHandler(this.txtTime_TextChanged);
+            this.txtTime.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTime_KeyDown);
+            this.txtTime.Leave += new System.EventHandler(this.txtTime_Leave);
+            this.txtTime.Validating += new System.ComponentModel.CancelEventHandler(this.txtTime_Validating);
             // 
             // textBox9
             // 
@@ -242,17 +253,46 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.Back.Text = "Back";
             this.Back.UseVisualStyleBackColor = false;
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.SystemColors.Menu;
+            this.pictureBox2.Location = new System.Drawing.Point(347, 96);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(429, 284);
+            this.pictureBox2.TabIndex = 33;
+            this.pictureBox2.TabStop = false;
+            // 
+            // Description
+            // 
+            this.Description.Location = new System.Drawing.Point(359, 107);
+            this.Description.Name = "Description";
+            this.Description.Size = new System.Drawing.Size(404, 260);
+            this.Description.TabIndex = 34;
+            this.Description.Text = "";
+            // 
+            // monthCalendar1
+            // 
+            this.monthCalendar1.Location = new System.Drawing.Point(315, 136);
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.TabIndex = 35;
+            this.monthCalendar1.Visible = false;
+            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
+            this.monthCalendar1.Leave += new System.EventHandler(this.monthCalendar1_Leave);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.monthCalendar1);
+            this.Controls.Add(this.Description);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.Back);
             this.Controls.Add(this.textBox11);
             this.Controls.Add(this.textBox10);
             this.Controls.Add(this.textBox9);
-            this.Controls.Add(this.textBox8);
+            this.Controls.Add(this.txtTime);
             this.Controls.Add(this.textBox7);
             this.Controls.Add(this.Event_title);
             this.Controls.Add(this.textBox6);
@@ -269,6 +309,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.Text = "Form2";
             ((System.ComponentModel.ISupportInitialize)(this.des1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -288,10 +329,13 @@ namespace Kalendarz_zdarzen_kulturalnych
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.TextBox Event_title;
         private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox txtTime;
         private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.TextBox textBox11;
         private System.Windows.Forms.Button Back;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.RichTextBox Description;
+        private System.Windows.Forms.MonthCalendar monthCalendar1;
     }
 }

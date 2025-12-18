@@ -30,6 +30,7 @@ namespace Kalendarz_zdarzen_kulturalnych
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Import = new System.Windows.Forms.Button();
             this.Cultural_Events_Calendar = new System.Windows.Forms.TextBox();
             this.des1 = new System.Windows.Forms.PictureBox();
@@ -53,7 +54,6 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.Delete_Event = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.Check_day = new System.Windows.Forms.Button();
-            this.Kalendarz = new System.Windows.Forms.DataGridView();
             this.Filt_Title = new System.Windows.Forms.TextBox();
             this.Filt_Data = new System.Windows.Forms.TextBox();
             this.Filt_Locat = new System.Windows.Forms.TextBox();
@@ -64,22 +64,23 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.Event_title = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Location = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.dgvEvents = new System.Windows.Forms.DataGridView();
+            this.colTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.des1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Kalendarz)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEvents)).BeginInit();
             this.SuspendLayout();
             // 
             // Import
@@ -373,26 +374,6 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.Check_day.UseVisualStyleBackColor = false;
             this.Check_day.Click += new System.EventHandler(this.Check_day_Click);
             // 
-            // Kalendarz
-            // 
-            this.Kalendarz.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.Kalendarz.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
-            this.Kalendarz.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.Kalendarz.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Kalendarz.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Event_title,
-            this.DateTime,
-            this.Location,
-            this.Type,
-            this.Cost});
-            this.Kalendarz.Location = new System.Drawing.Point(247, 202);
-            this.Kalendarz.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.Kalendarz.Name = "Kalendarz";
-            this.Kalendarz.RowHeadersWidth = 4;
-            this.Kalendarz.RowTemplate.Height = 24;
-            this.Kalendarz.Size = new System.Drawing.Size(1005, 408);
-            this.Kalendarz.TabIndex = 23;
-            // 
             // Filt_Title
             // 
             this.Filt_Title.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -521,45 +502,6 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.pictureBox7.Visible = false;
             this.pictureBox7.Click += new System.EventHandler(this.pictureBox7_Click);
             // 
-            // Event_title
-            // 
-            this.Event_title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Event_title.HeaderText = "Event title";
-            this.Event_title.Name = "Event_title";
-            this.Event_title.ReadOnly = true;
-            // 
-            // DateTime
-            // 
-            this.DateTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.DateTime.FillWeight = 120F;
-            this.DateTime.HeaderText = "Date & Time";
-            this.DateTime.Name = "DateTime";
-            this.DateTime.ReadOnly = true;
-            // 
-            // Location
-            // 
-            this.Location.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Location.FillWeight = 90F;
-            this.Location.HeaderText = "Location";
-            this.Location.Name = "Location";
-            this.Location.ReadOnly = true;
-            // 
-            // Type
-            // 
-            this.Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Type.FillWeight = 60F;
-            this.Type.HeaderText = "Type";
-            this.Type.Name = "Type";
-            this.Type.ReadOnly = true;
-            // 
-            // Cost
-            // 
-            this.Cost.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Cost.FillWeight = 40F;
-            this.Cost.HeaderText = "Cost";
-            this.Cost.Name = "Cost";
-            this.Cost.ReadOnly = true;
-            // 
             // pictureBox8
             // 
             this.pictureBox8.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -572,12 +514,75 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.pictureBox8.TabIndex = 35;
             this.pictureBox8.TabStop = false;
             // 
+            // dgvEvents
+            // 
+            this.dgvEvents.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEvents.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvEvents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEvents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colTitle,
+            this.colDate,
+            this.colLocation,
+            this.colType,
+            this.colCost});
+            this.dgvEvents.Location = new System.Drawing.Point(247, 215);
+            this.dgvEvents.Name = "dgvEvents";
+            this.dgvEvents.RowTemplate.Height = 30;
+            this.dgvEvents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvEvents.Size = new System.Drawing.Size(1005, 395);
+            this.dgvEvents.TabIndex = 36;
+            this.dgvEvents.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEvents_CellContentClick);
+            // 
+            // colTitle
+            // 
+            this.colTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colTitle.HeaderText = "Event Title";
+            this.colTitle.Name = "colTitle";
+            this.colTitle.ReadOnly = true;
+            // 
+            // colDate
+            // 
+            this.colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDate.HeaderText = "Date & Time";
+            this.colDate.Name = "colDate";
+            this.colDate.ReadOnly = true;
+            // 
+            // colLocation
+            // 
+            this.colLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colLocation.HeaderText = "Location";
+            this.colLocation.Name = "colLocation";
+            this.colLocation.ReadOnly = true;
+            // 
+            // colType
+            // 
+            this.colType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colType.HeaderText = "Type";
+            this.colType.Name = "colType";
+            this.colType.ReadOnly = true;
+            // 
+            // colCost
+            // 
+            this.colCost.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colCost.HeaderText = "Cost";
+            this.colCost.Name = "colCost";
+            this.colCost.ReadOnly = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.dgvEvents);
             this.Controls.Add(this.pictureBox8);
             this.Controls.Add(this.pictureBox7);
             this.Controls.Add(this.pictureBox6);
@@ -589,7 +594,6 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.Controls.Add(this.Filt_Locat);
             this.Controls.Add(this.Filt_Data);
             this.Controls.Add(this.Filt_Title);
-            this.Controls.Add(this.Kalendarz);
             this.Controls.Add(this.Check_day);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.Delete_Event);
@@ -619,13 +623,13 @@ namespace Kalendarz_zdarzen_kulturalnych
             ((System.ComponentModel.ISupportInitialize)(this.des1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Kalendarz)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEvents)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -656,7 +660,6 @@ namespace Kalendarz_zdarzen_kulturalnych
         private System.Windows.Forms.Button Delete_Event;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button Check_day;
-        private System.Windows.Forms.DataGridView Kalendarz;
         private System.Windows.Forms.TextBox Filt_Title;
         private System.Windows.Forms.TextBox Filt_Data;
         private System.Windows.Forms.TextBox Filt_Locat;
@@ -667,12 +670,13 @@ namespace Kalendarz_zdarzen_kulturalnych
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.PictureBox pictureBox7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Event_title;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DateTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Location;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cost;
         private System.Windows.Forms.PictureBox pictureBox8;
+        private System.Windows.Forms.DataGridView dgvEvents;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTitle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCost;
     }
 }
 
