@@ -12,6 +12,7 @@ namespace Kalendarz_zdarzen_kulturalnych
 {
     public partial class Form1 : Form
     {
+        private List<Zdarzenie> events = new List<Zdarzenie>();
         public bool Event_Up=true;
         public Form1()
         {
@@ -24,6 +25,33 @@ namespace Kalendarz_zdarzen_kulturalnych
             textBox7.Text = "YYYY/MM/DD";
             textBox7.ForeColor = Color.Gray;
             SwitchEvent();
+            dgvEvents.AutoGenerateColumns = false;
+
+            dgvEvents.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                HeaderText = "Title",
+                DataPropertyName = "Title"
+            });
+            dgvEvents.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                HeaderText = "Date",
+                DataPropertyName = "Date"
+            });
+            dgvEvents.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                HeaderText = "Location",
+                DataPropertyName = "Location"
+            });
+            dgvEvents.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                HeaderText = "Type",
+                DataPropertyName = "Type"
+            });
+            dgvEvents.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                HeaderText = "Cost",
+                DataPropertyName = "Cost"
+            });
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -113,13 +141,25 @@ namespace Kalendarz_zdarzen_kulturalnych
             {
                 if (f2.ShowDialog() == DialogResult.OK)
                 {
-                    dgvEvents.Rows.Add(f2.EventTitle, f2.EventDate, f2.EventLocation, f2.EventType, f2.EventCost);
+                    events.Add(f2.NewEvent);
+                    RefreshGrid();
                 }
             }
+            //using (Form2 f2 = new Form2())
+            //{
+            //if (f2.ShowDialog() == DialogResult.OK)
+            //{
+            //dgvEvents.Rows.Add(f2.EventTitle, f2.EventDate, f2.EventLocation, f2.EventType, f2.EventCost);
+                //}
+            //}
             //Form2 newWindow = new Form2();
             //newWindow.Show();
         }
-
+        private void RefreshGrid()
+        {
+            dgvEvents.DataSource = null;
+            dgvEvents.DataSource = events;
+        }
         private void Check_day_Click(object sender, EventArgs e)
         {
             Day newWindow = new Day();
@@ -153,16 +193,22 @@ namespace Kalendarz_zdarzen_kulturalnych
 
         private void Delete_Event_Click(object sender, EventArgs e)
         {
+            //if (dgvEvents.SelectedRows.Count > 0)
+            //{
+            //   foreach (DataGridViewRow row in dgvEvents.SelectedRows)
+            //  {
+            //      dgvEvents.Rows.Remove(row);
+            //  }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Please select a full row to delete.");
+            //}
             if (dgvEvents.SelectedRows.Count > 0)
             {
-                foreach (DataGridViewRow row in dgvEvents.SelectedRows)
-                {
-                    dgvEvents.Rows.Remove(row);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please select a full row to delete.");
+                Zdarzenie selected = dgvEvents.SelectedRows[0].DataBoundItem as Zdarzenie;
+                events.Remove(selected);
+                RefreshGrid();
             }
         }
     }

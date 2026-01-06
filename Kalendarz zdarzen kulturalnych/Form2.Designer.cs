@@ -269,6 +269,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.Description.Size = new System.Drawing.Size(404, 260);
             this.Description.TabIndex = 34;
             this.Description.Text = "";
+            this.Description.TextChanged += new System.EventHandler(this.Description_TextChanged);
             // 
             // monthCalendar1
             // 

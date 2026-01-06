@@ -66,6 +66,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Zdarzenie.cs" />
     <EmbeddedResource Include="Day.resx">
       <DependentUpon>Day.cs</DependentUpon>
     </EmbeddedResource>
