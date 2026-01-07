@@ -32,26 +32,38 @@ namespace Kalendarz_zdarzen_kulturalnych
                 HeaderText = "Title",
                 DataPropertyName = "Title"
             });
+
             dgvEvents.Columns.Add(new DataGridViewTextBoxColumn()
             {
-                HeaderText = "Date",
-                DataPropertyName = "Date"
+                HeaderText = "Date & Time",
+                DataPropertyName = "DateTimeDisplay",
+                Width = 180
             });
+
             dgvEvents.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 HeaderText = "Location",
                 DataPropertyName = "Location"
             });
+
             dgvEvents.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 HeaderText = "Type",
                 DataPropertyName = "Type"
             });
+
             dgvEvents.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 HeaderText = "Cost",
                 DataPropertyName = "Cost"
             });
+            dgvEvents.EnableHeadersVisualStyles = false;
+
+            dgvEvents.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
+            dgvEvents.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
+            dgvEvents.ColumnHeadersDefaultCellStyle.Font =
+                new Font("Segoe UI", 10, FontStyle.Bold);
+
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -150,7 +162,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             //if (f2.ShowDialog() == DialogResult.OK)
             //{
             //dgvEvents.Rows.Add(f2.EventTitle, f2.EventDate, f2.EventLocation, f2.EventType, f2.EventCost);
-                //}
+            //}
             //}
             //Form2 newWindow = new Form2();
             //newWindow.Show();

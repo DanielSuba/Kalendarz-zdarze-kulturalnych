@@ -49,6 +49,10 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.Description = new System.Windows.Forms.RichTextBox();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.txtTimeEnd = new System.Windows.Forms.TextBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.Tagslist = new System.Windows.Forms.TextBox();
+            this.Tags = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.des1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -134,14 +138,14 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(100, 23);
             this.textBox3.TabIndex = 22;
-            this.textBox3.Text = "Time";
+            this.textBox3.Text = "Time Start";
             // 
             // textBox4
             // 
             this.textBox4.BackColor = System.Drawing.SystemColors.Menu;
             this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox4.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(21, 194);
+            this.textBox4.Location = new System.Drawing.Point(21, 231);
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
             this.textBox4.Size = new System.Drawing.Size(100, 23);
@@ -153,7 +157,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.textBox5.BackColor = System.Drawing.SystemColors.Menu;
             this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox5.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.Location = new System.Drawing.Point(21, 223);
+            this.textBox5.Location = new System.Drawing.Point(21, 260);
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
             this.textBox5.Size = new System.Drawing.Size(100, 23);
@@ -165,7 +169,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.textBox6.BackColor = System.Drawing.SystemColors.Menu;
             this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox6.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox6.Location = new System.Drawing.Point(21, 252);
+            this.textBox6.Location = new System.Drawing.Point(21, 324);
             this.textBox6.Name = "textBox6";
             this.textBox6.ReadOnly = true;
             this.textBox6.Size = new System.Drawing.Size(100, 23);
@@ -214,7 +218,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.txt_Location.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_Location.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_Location.ForeColor = System.Drawing.Color.Black;
-            this.txt_Location.Location = new System.Drawing.Point(127, 194);
+            this.txt_Location.Location = new System.Drawing.Point(127, 231);
             this.txt_Location.Name = "txt_Location";
             this.txt_Location.Size = new System.Drawing.Size(190, 26);
             this.txt_Location.TabIndex = 29;
@@ -224,7 +228,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.txt_Type.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_Type.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_Type.ForeColor = System.Drawing.Color.Black;
-            this.txt_Type.Location = new System.Drawing.Point(127, 223);
+            this.txt_Type.Location = new System.Drawing.Point(127, 260);
             this.txt_Type.Name = "txt_Type";
             this.txt_Type.Size = new System.Drawing.Size(190, 26);
             this.txt_Type.TabIndex = 30;
@@ -234,7 +238,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.txt_Cost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_Cost.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_Cost.ForeColor = System.Drawing.Color.Black;
-            this.txt_Cost.Location = new System.Drawing.Point(127, 252);
+            this.txt_Cost.Location = new System.Drawing.Point(127, 324);
             this.txt_Cost.Name = "txt_Cost";
             this.txt_Cost.Size = new System.Drawing.Size(190, 26);
             this.txt_Cost.TabIndex = 31;
@@ -280,12 +284,64 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             this.monthCalendar1.Leave += new System.EventHandler(this.monthCalendar1_Leave);
             // 
+            // txtTimeEnd
+            // 
+            this.txtTimeEnd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTimeEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTimeEnd.ForeColor = System.Drawing.Color.Black;
+            this.txtTimeEnd.Location = new System.Drawing.Point(127, 197);
+            this.txtTimeEnd.MaxLength = 5;
+            this.txtTimeEnd.Name = "txtTimeEnd";
+            this.txtTimeEnd.Size = new System.Drawing.Size(190, 26);
+            this.txtTimeEnd.TabIndex = 37;
+            this.txtTimeEnd.TextChanged += new System.EventHandler(this.txtTimeEnd_TextChanged);
+            this.txtTimeEnd.Leave += new System.EventHandler(this.txtTimeEnd_Leave);
+            this.txtTimeEnd.Validating += new System.ComponentModel.CancelEventHandler(this.txtTimeEnd_Validating);
+            // 
+            // textBox9
+            // 
+            this.textBox9.BackColor = System.Drawing.SystemColors.Menu;
+            this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox9.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox9.Location = new System.Drawing.Point(21, 197);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.ReadOnly = true;
+            this.textBox9.Size = new System.Drawing.Size(100, 23);
+            this.textBox9.TabIndex = 36;
+            this.textBox9.Text = "Time End";
+            // 
+            // Tagslist
+            // 
+            this.Tagslist.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Tagslist.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Tagslist.ForeColor = System.Drawing.Color.Black;
+            this.Tagslist.Location = new System.Drawing.Point(127, 292);
+            this.Tagslist.Name = "Tagslist";
+            this.Tagslist.Size = new System.Drawing.Size(190, 26);
+            this.Tagslist.TabIndex = 39;
+            // 
+            // Tags
+            // 
+            this.Tags.BackColor = System.Drawing.SystemColors.Menu;
+            this.Tags.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Tags.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Tags.Location = new System.Drawing.Point(21, 292);
+            this.Tags.Name = "Tags";
+            this.Tags.ReadOnly = true;
+            this.Tags.Size = new System.Drawing.Size(100, 23);
+            this.Tags.TabIndex = 38;
+            this.Tags.Text = "Tags";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Tagslist);
+            this.Controls.Add(this.Tags);
+            this.Controls.Add(this.txtTimeEnd);
+            this.Controls.Add(this.textBox9);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.Description);
             this.Controls.Add(this.pictureBox2);
@@ -339,5 +395,9 @@ namespace Kalendarz_zdarzen_kulturalnych
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.RichTextBox Description;
         private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.TextBox txtTimeEnd;
+        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.TextBox Tagslist;
+        private System.Windows.Forms.TextBox Tags;
     }
 }

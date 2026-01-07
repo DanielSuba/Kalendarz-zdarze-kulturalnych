@@ -32,11 +32,17 @@ namespace Kalendarz_zdarzen_kulturalnych
             {
                 Title = Event_title.Text,
                 Date = DateTime.Parse(textBox7.Text),
-                Time = txtTime.Text,
+                TimeStart = txtTime.Text,
+                TimeEnd = txtTimeEnd.Text,
                 Location = txt_Location.Text,
                 Type = txt_Type.Text,
                 Cost = decimal.TryParse(txt_Cost.Text, out var c) ? c : 0,
-                Description = Description.Text
+                Description = Description.Text,
+                Tags = Tagslist.Text
+            .Split(',')
+            .Select(t => t.Trim())
+            .Where(t => t.Length > 0)
+            .ToList()
             };
 
             this.DialogResult = DialogResult.OK;
@@ -123,6 +129,54 @@ namespace Kalendarz_zdarzen_kulturalnych
         private void Description_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtTimeEnd_TextChanged(object sender, EventArgs e)
+        {
+            if (isDeleting) return;
+
+            string input = txtTimeEnd.Text;
+
+            if (input.Length == 2 && !input.Contains(":"))
+            {
+                txtTimeEnd.Text += ":";
+                txtTimeEnd.SelectionStart = txtTimeEnd.Text.Length;
+            }
+
+            if (input.Length > 5)
+            {
+                txtTimeEnd.Text = input.Substring(0, 5);
+                txtTimeEnd.SelectionStart = txtTimeEnd.Text.Length;
+            }
+        }
+
+        private void txtTimeEnd_Validating(object sender, CancelEventArgs e)
+        {
+            string input = txtTimeEnd.Text;
+
+            bool isValid = System.Text.RegularExpressions.Regex.IsMatch(input, @"^([01][0-9]|2[0-3]):[0-5][0-9]$");
+
+            if (!isValid && !string.IsNullOrWhiteSpace(input))
+            {
+                MessageBox.Show("Invalid Time! Please use the 00:00 format (e.g., 14:30).",
+                                "Format Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                txtTimeEnd.Clear();
+            }
+        }
+
+        private void txtTimeEnd_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtTimeEnd.Text)) return;
+
+            bool isValid = System.Text.RegularExpressions.Regex.IsMatch(txtTimeEnd.Text, @"^([01][0-9]|2[0-3]):[0-5][0-9]$");
+
+            if (!isValid)
+            {
+                MessageBox.Show("Invalid format! Please use 00:00", "Format Error");
+                txtTimeEnd.Clear();
+                txtTimeEnd.Focus();
+            }
         }
     }
 }
