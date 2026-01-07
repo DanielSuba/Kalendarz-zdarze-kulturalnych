@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Kalendarz_zdarzen_kulturalnych
 {
@@ -17,6 +18,7 @@ namespace Kalendarz_zdarzen_kulturalnych
         public Form1()
         {
             InitializeComponent();
+            this.KeyPreview = true;
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -94,6 +96,105 @@ namespace Kalendarz_zdarzen_kulturalnych
                 textBox7.ForeColor = Color.Black;
             }
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.S))
+            {
+                SaveToCsv("data.csv");
+                MessageBox.Show("Data saved successfully.");
+                return true;
+            }
+
+            if (keyData == (Keys.Control | Keys.E))
+            {
+                LoadFromCsvWithBackup();
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void SaveToCsv(string fileName)
+        {
+            using (StreamWriter sw = new StreamWriter(fileName))
+            {
+                sw.WriteLine("Id;Title;Date;TimeStart;TimeEnd;Location;Type;Cost;Description;Tags");
+
+                foreach (var e in events)
+                {
+                    string tags = string.Join(",", e.Tags);
+
+                    sw.WriteLine(
+                        $"{e.Id};{e.Title};{e.Date:yyyy-MM-dd};{e.TimeStart};{e.TimeEnd};" +
+                        $"{e.Location};{e.Type};{e.Cost};{e.Description};{tags}"
+                    );
+                }
+            }
+        }
+
+        private string GetNextBackupFileName()
+        {
+            int i = 1;
+            while (File.Exists($"backup{i}.csv"))
+                i++;
+
+            return $"backup{i}.csv";
+        }
+
+        private void LoadFromCsvWithBackup()
+        {
+            OpenFileDialog ofd = new OpenFileDialog
+            {
+                Filter = "CSV files (*.csv)|*.csv",
+                Title = "Select CSV file"
+            };
+
+            if (ofd.ShowDialog() != DialogResult.OK)
+                return;
+
+            // Backup existing data
+            if (events.Count > 0)
+            {
+                string backupName = GetNextBackupFileName();
+                SaveToCsv(backupName);
+            }
+
+            LoadFromCsv(ofd.FileName);
+            RefreshGrid();
+        }
+
+        private void LoadFromCsv(string fileName)
+        {
+            events.Clear();
+
+            var lines = File.ReadAllLines(fileName).Skip(1); // skip header
+
+            foreach (var line in lines)
+            {
+                var parts = line.Split(';');
+
+                var ev = new Zdarzenie
+                {
+                    Title = parts[1],
+                    Date = DateTime.Parse(parts[2]),
+                    TimeStart = parts[3],
+                    TimeEnd = parts[4],
+                    Location = parts[5],
+                    Type = parts[6],
+                    Cost = decimal.Parse(parts[7]),
+                    Description = parts[8],
+                    Tags = parts[9]
+                        .Split(',')
+                        .Select(t => t.Trim())
+                        .Where(t => t.Length > 0)
+                        .ToList()
+                };
+
+                events.Add(ev);
+            }
+        }
+
 
         private void textBox7_Leave(object sender, EventArgs e)
         {
@@ -222,6 +323,16 @@ namespace Kalendarz_zdarzen_kulturalnych
                 events.Remove(selected);
                 RefreshGrid();
             }
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox8_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

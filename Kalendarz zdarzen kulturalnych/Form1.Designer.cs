@@ -358,6 +358,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.pictureBox8.Size = new System.Drawing.Size(200, 88);
             this.pictureBox8.TabIndex = 35;
             this.pictureBox8.TabStop = false;
+            this.pictureBox8.Click += new System.EventHandler(this.pictureBox8_Click);
             // 
             // dgvEvents
             // 
@@ -417,7 +418,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.ClientSize = new System.Drawing.Size(1265, 681);
             this.Controls.Add(this.EksportCal);
             this.Controls.Add(this.dgvEvents);
             this.Controls.Add(this.pictureBox8);
