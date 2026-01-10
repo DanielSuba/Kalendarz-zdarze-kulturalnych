@@ -91,7 +91,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.Newevent.Name = "Newevent";
             this.Newevent.Size = new System.Drawing.Size(116, 40);
             this.Newevent.TabIndex = 18;
-            this.Newevent.Text = "Add new event";
+            this.Newevent.Text = "Add event";
             this.Newevent.UseVisualStyleBackColor = false;
             this.Newevent.Click += new System.EventHandler(this.Newevent_Click);
             // 

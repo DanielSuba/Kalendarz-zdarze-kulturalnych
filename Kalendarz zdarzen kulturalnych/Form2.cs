@@ -13,22 +13,32 @@ namespace Kalendarz_zdarzen_kulturalnych
     public partial class Form2 : Form
     {
         bool isDeleting = false;
-        public string EventTitle { get; set; }
-        public string EventDate { get; set; }
-        public string EventTime { get; set; }
-        public string EventLocation { get; set; }
-        public string EventType { get; set; }
-        public string EventCost { get; set; }
-
         public Zdarzenie NewEvent { get; private set; }
+
+        private Zdarzenie editingEvent = null;
+
         public Form2()
         {
             InitializeComponent();
         }
-
+  
         private void Newevent_Click(object sender, EventArgs e)
         {
-            NewEvent = new Zdarzenie()
+            if (editingEvent == null)
+            {
+                // ADD MODE
+                NewEvent = new Zdarzenie();
+                FillEvent(NewEvent);
+            }
+            else
+            {
+                // EDIT MODE
+                FillEvent(editingEvent);
+            }
+
+            DialogResult = DialogResult.OK;
+            Close();
+            /*NewEvent = new Zdarzenie()
             {
                 Title = Event_title.Text,
                 Date = DateTime.Parse(textBox7.Text),
@@ -46,7 +56,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             };
 
             this.DialogResult = DialogResult.OK;
-            this.Close();
+            this.Close();*/
         }
 
         private void textBox7_Click(object sender, EventArgs e)
@@ -178,5 +188,42 @@ namespace Kalendarz_zdarzen_kulturalnych
                 txtTimeEnd.Focus();
             }
         }
+
+        public Form2(Zdarzenie ev) : this()
+        {
+            editingEvent = ev;
+            LoadEventForEdit();
+        }
+
+        private void LoadEventForEdit()
+        {
+            Event_title.Text = editingEvent.Title;
+            textBox7.Text = editingEvent.Date.ToString("yyyy-MM-dd");
+            txtTime.Text = editingEvent.TimeStart;
+            txtTimeEnd.Text = editingEvent.TimeEnd;
+            txt_Location.Text = editingEvent.Location;
+            txt_Type.Text = editingEvent.Type;
+            txt_Cost.Text = editingEvent.Cost.ToString();
+            Tagslist.Text = string.Join(", ", editingEvent.Tags);
+            Description.Text = editingEvent.Description;
+        }
+
+        private void FillEvent(Zdarzenie ev)
+        {
+            ev.Title = Event_title.Text;
+            ev.Date = DateTime.Parse(textBox7.Text);
+            ev.TimeStart = txtTime.Text;
+            ev.TimeEnd = txtTimeEnd.Text;
+            ev.Location = txt_Location.Text;
+            ev.Type = txt_Type.Text;
+            ev.Cost = decimal.TryParse(txt_Cost.Text, out var c) ? c : 0;
+            ev.Description = Description.Text;
+            ev.Tags = Tagslist.Text
+                .Split(',')
+                .Select(t => t.Trim())
+                .Where(t => t.Length > 0)
+                .ToList();
+        }
+
     }
 }

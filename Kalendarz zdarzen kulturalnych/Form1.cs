@@ -66,7 +66,9 @@ namespace Kalendarz_zdarzen_kulturalnych
             dgvEvents.ColumnHeadersDefaultCellStyle.Font =
                 new Font("Segoe UI", 10, FontStyle.Bold);
 
+            LoadDataOnStartup();
         }
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
@@ -96,6 +98,8 @@ namespace Kalendarz_zdarzen_kulturalnych
                 textBox7.ForeColor = Color.Black;
             }
         }
+
+        // ********************************************************** CSV **********************************************************
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
@@ -195,6 +199,35 @@ namespace Kalendarz_zdarzen_kulturalnych
             }
         }
 
+        private void LoadDataOnStartup()
+        {
+            string fileName = "data.csv";
+
+            if (!File.Exists(fileName))
+                return;
+
+            try
+            {
+                LoadFromCsv(fileName);
+                RefreshGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Failed to load data.csv\n\n" + ex.Message,
+                    "Load Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+        private void EksportCal_Click(object sender, EventArgs e)
+        {
+            SaveToCsv("data.csv");
+            MessageBox.Show("Data saved successfully.");
+        }
+
+        // ********************************************************** CSV **********************************************************
 
         private void textBox7_Leave(object sender, EventArgs e)
         {
@@ -245,7 +278,7 @@ namespace Kalendarz_zdarzen_kulturalnych
 
         private void Import_Click(object sender, EventArgs e)
         {
-
+            LoadFromCsvWithBackup();
         }
 
         private void Add_event_Click(object sender, EventArgs e)
@@ -258,25 +291,25 @@ namespace Kalendarz_zdarzen_kulturalnych
                     RefreshGrid();
                 }
             }
-            //using (Form2 f2 = new Form2())
-            //{
-            //if (f2.ShowDialog() == DialogResult.OK)
-            //{
-            //dgvEvents.Rows.Add(f2.EventTitle, f2.EventDate, f2.EventLocation, f2.EventType, f2.EventCost);
-            //}
-            //}
-            //Form2 newWindow = new Form2();
-            //newWindow.Show();
         }
-        private void RefreshGrid()
+        public void RefreshGrid()
         {
             dgvEvents.DataSource = null;
             dgvEvents.DataSource = events;
         }
         private void Check_day_Click(object sender, EventArgs e)
         {
-            Day newWindow = new Day();
-            newWindow.Show();
+            if (dgvEvents.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select an event first.");
+                return;
+            }
+
+            var selectedEvent =
+                dgvEvents.SelectedRows[0].DataBoundItem as Zdarzenie;
+
+            Day dayForm = new Day(selectedEvent, events, this);
+            dayForm.Show();
         }
 
         private void pictureBox7_Click(object sender, EventArgs e)
@@ -304,19 +337,10 @@ namespace Kalendarz_zdarzen_kulturalnych
 
         }
 
+        // ********************************************************** Delete Event **********************************************************
+
         private void Delete_Event_Click(object sender, EventArgs e)
         {
-            //if (dgvEvents.SelectedRows.Count > 0)
-            //{
-            //   foreach (DataGridViewRow row in dgvEvents.SelectedRows)
-            //  {
-            //      dgvEvents.Rows.Remove(row);
-            //  }
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Please select a full row to delete.");
-            //}
             if (dgvEvents.SelectedRows.Count > 0)
             {
                 Zdarzenie selected = dgvEvents.SelectedRows[0].DataBoundItem as Zdarzenie;
@@ -324,6 +348,8 @@ namespace Kalendarz_zdarzen_kulturalnych
                 RefreshGrid();
             }
         }
+
+        // ********************************************************** Delete Event **********************************************************
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -334,5 +360,68 @@ namespace Kalendarz_zdarzen_kulturalnych
         {
 
         }
+
+        
+
+        // ********************************************************** Export event TXT **********************************************************
+
+        private void Export_day_Click(object sender, EventArgs e)
+        {
+            if (dgvEvents.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select an event first.");
+                return;
+            }
+
+            var ev =
+                dgvEvents.SelectedRows[0].DataBoundItem as Zdarzenie;
+
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                Filter = "Text files (*.txt)|*.txt",
+                FileName = $"Event_{ev.Date:yyyy-MM-dd}.txt"
+            };
+
+            if (sfd.ShowDialog() != DialogResult.OK)
+                return;
+
+            using (StreamWriter sw = new StreamWriter(sfd.FileName))
+            {
+                sw.WriteLine("Event details");
+                sw.WriteLine(new string('-', 40));
+
+                sw.WriteLine($"Title: {ev.Title}");
+                sw.WriteLine($"Date: {ev.Date:yyyy-MM-dd}");
+                sw.WriteLine($"Time: {ev.TimeStart} - {ev.TimeEnd}");
+                sw.WriteLine($"Location: {ev.Location}");
+                sw.WriteLine($"Type: {ev.Type}");
+                sw.WriteLine($"Cost: {ev.Cost}");
+                sw.WriteLine($"Description: {ev.Description}");
+                sw.WriteLine($"Tags: {string.Join(", ", ev.Tags)}");
+            }
+        }
+
+        private void Edit_Event_Click(object sender, EventArgs e)
+        {
+            if (dgvEvents.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select an event first.");
+                return;
+            }
+
+            var selectedEvent =
+                dgvEvents.SelectedRows[0].DataBoundItem as Zdarzenie;
+
+            using (Form2 f2 = new Form2(selectedEvent))
+            {
+                if (f2.ShowDialog() == DialogResult.OK)
+                {
+                    RefreshGrid();
+                }
+            }
+        }
+
+        // ********************************************************** Export event TXT **********************************************************
+
     }
 }
