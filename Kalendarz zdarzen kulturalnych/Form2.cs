@@ -38,25 +38,6 @@ namespace Kalendarz_zdarzen_kulturalnych
 
             DialogResult = DialogResult.OK;
             Close();
-            /*NewEvent = new Zdarzenie()
-            {
-                Title = Event_title.Text,
-                Date = DateTime.Parse(textBox7.Text),
-                TimeStart = txtTime.Text,
-                TimeEnd = txtTimeEnd.Text,
-                Location = txt_Location.Text,
-                Type = txt_Type.Text,
-                Cost = decimal.TryParse(txt_Cost.Text, out var c) ? c : 0,
-                Description = Description.Text,
-                Tags = Tagslist.Text
-            .Split(',')
-            .Select(t => t.Trim())
-            .Where(t => t.Length > 0)
-            .ToList()
-            };
-
-            this.DialogResult = DialogResult.OK;
-            this.Close();*/
         }
 
         private void textBox7_Click(object sender, EventArgs e)

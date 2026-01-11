@@ -15,6 +15,8 @@ namespace Kalendarz_zdarzen_kulturalnych
     {
         private List<Zdarzenie> events = new List<Zdarzenie>();
         public bool Event_Up=true;
+
+        private List<Zdarzenie> allEvents = new List<Zdarzenie>();
         public Form1()
         {
             InitializeComponent();
@@ -22,10 +24,10 @@ namespace Kalendarz_zdarzen_kulturalnych
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            textBox6.Text = "YYYY/MM/DD";
-            textBox6.ForeColor = Color.Gray;
-            textBox7.Text = "YYYY/MM/DD";
-            textBox7.ForeColor = Color.Gray;
+            DateStart.Text = "YYYY/MM/DD";
+            DateStart.ForeColor = Color.Gray;
+            DateEnd.Text = "YYYY/MM/DD";
+            DateEnd.ForeColor = Color.Gray;
             SwitchEvent();
             dgvEvents.AutoGenerateColumns = false;
 
@@ -67,6 +69,10 @@ namespace Kalendarz_zdarzen_kulturalnych
                 new Font("Segoe UI", 10, FontStyle.Bold);
 
             LoadDataOnStartup();
+
+            monthCalendar1.Visible = false;
+            monthCalendar2.Visible = false;
+
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -75,27 +81,35 @@ namespace Kalendarz_zdarzen_kulturalnych
         }
         private void textBox6_Enter(object sender, EventArgs e)
         {
-            if (textBox6.Text == "YYYY/MM/DD")
+            monthCalendar1.Location = new Point(DateStart.Left, DateStart.Bottom);
+            monthCalendar1.Visible = true;
+            monthCalendar1.BringToFront();
+
+            if (DateStart.Text == "YYYY/MM/DD")
             {
-                textBox6.Text = "";
-                textBox6.ForeColor = Color.Black;
+                DateStart.Text = "";
+                DateStart.ForeColor = Color.Black;
             }
         }
         private void textBox6_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(textBox6.Text))
+            monthCalendar2.Location = new Point(DateEnd.Left, DateEnd.Bottom);
+            monthCalendar2.Visible = true;
+            monthCalendar2.BringToFront();
+
+            if (DateEnd.Text == "YYYY/MM/DD")
             {
-                textBox6.Text = "YYYY/MM/DD";
-                textBox6.ForeColor = Color.Gray;
+                DateEnd.Text = "";
+                DateEnd.ForeColor = Color.Black;
             }
         }
 
         private void textBox7_Enter(object sender, EventArgs e)
         {
-            if (textBox7.Text == "YYYY/MM/DD")
+            if (DateEnd.Text == "YYYY/MM/DD")
             {
-                textBox7.Text = "";
-                textBox7.ForeColor = Color.Black;
+                DateEnd.Text = "";
+                DateEnd.ForeColor = Color.Black;
             }
         }
 
@@ -166,6 +180,7 @@ namespace Kalendarz_zdarzen_kulturalnych
 
             LoadFromCsv(ofd.FileName);
             RefreshGrid();
+            RefreshFilterOptions();
         }
 
         private void LoadFromCsv(string fileName)
@@ -210,6 +225,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             {
                 LoadFromCsv(fileName);
                 RefreshGrid();
+                RefreshFilterOptions();
             }
             catch (Exception ex)
             {
@@ -231,10 +247,10 @@ namespace Kalendarz_zdarzen_kulturalnych
 
         private void textBox7_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(textBox7.Text))
+            if (string.IsNullOrWhiteSpace(DateEnd.Text))
             {
-                textBox7.Text = "YYYY/MM/DD";
-                textBox7.ForeColor = Color.Gray;
+                DateEnd.Text = "YYYY/MM/DD";
+                DateEnd.ForeColor = Color.Gray;
             }
         }
 
@@ -292,11 +308,21 @@ namespace Kalendarz_zdarzen_kulturalnych
                 }
             }
         }
+
+        /// <summary>
+        /// ////////////////////////////////Update/////////////////////////////////
+        /// </summary>
         public void RefreshGrid()
         {
+            allEvents = events.ToList();
             dgvEvents.DataSource = null;
             dgvEvents.DataSource = events;
         }
+
+        /// <summary>
+        /// ////////////////////////////////Update/////////////////////////////////
+        /// </summary>
+ 
         private void Check_day_Click(object sender, EventArgs e)
         {
             if (dgvEvents.SelectedRows.Count == 0)
@@ -346,6 +372,7 @@ namespace Kalendarz_zdarzen_kulturalnych
                 Zdarzenie selected = dgvEvents.SelectedRows[0].DataBoundItem as Zdarzenie;
                 events.Remove(selected);
                 RefreshGrid();
+                RefreshFilterOptions();
             }
         }
 
@@ -417,11 +444,184 @@ namespace Kalendarz_zdarzen_kulturalnych
                 if (f2.ShowDialog() == DialogResult.OK)
                 {
                     RefreshGrid();
+                    RefreshFilterOptions();
                 }
             }
         }
 
         // ********************************************************** Export event TXT **********************************************************
+
+        // ********************************************************** Filters **********************************************************
+        private void DateStart_TextChanged(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = true;
+            monthCalendar1.BringToFront();
+        }
+
+        private void DateEnd_TextChanged(object sender, EventArgs e)
+        {
+            monthCalendar2.Visible = true;
+            monthCalendar2.BringToFront();
+        }
+
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        {
+
+        }
+
+        private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            DateStart.Text = e.Start.ToString("yyyy-MM-dd");
+            monthCalendar1.Visible = false;
+        }
+
+        private void monthCalendar2_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            DateEnd.Text = e.Start.ToString("yyyy-MM-dd");
+            monthCalendar2.Visible = false;
+        }
+
+        private void ApplyDateFilter()
+        {
+            DateTime from, to;
+            bool hasFrom = DateTime.TryParse(DateStart.Text, out from);
+            bool hasTo = DateTime.TryParse(DateEnd.Text, out to);
+
+            var selectedTypes = clbType.CheckedItems.Cast<string>().ToList();
+            var selectedLocations = clbLocation.CheckedItems.Cast<string>().ToList();
+            var selectedTags = clbTags.CheckedItems.Cast<string>().ToList();
+
+            var filtered = allEvents.AsEnumerable();
+
+            // Date filter
+            if (hasFrom)
+                filtered = filtered.Where(e => e.Date.Date >= from.Date);
+
+            if (hasTo)
+                filtered = filtered.Where(e => e.Date.Date <= to.Date);
+
+            // Type filter
+            if (selectedTypes.Any())
+                filtered = filtered.Where(e => selectedTypes.Contains(e.Type));
+
+            // Location filter
+            if (selectedLocations.Any())
+                filtered = filtered.Where(e => selectedLocations.Contains(e.Location));
+
+            // Tags filter (event must contain at least ONE selected tag)
+            if (selectedTags.Any())
+                filtered = filtered.Where(e =>
+                    e.Tags.Any(tag => selectedTags.Contains(tag)));
+
+            dgvEvents.DataSource = null;
+            dgvEvents.DataSource = filtered.ToList();
+        }
+
+
+        private void Form1_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = false;
+            monthCalendar2.Visible = false;
+        }
+        
+        private void Apply_Filters_Click(object sender, EventArgs e)
+        {
+            ApplyDateFilter();
+        }
+
+        private void Clear_Filters_Click(object sender, EventArgs e)
+        {
+            DateStart.Clear();
+            DateEnd.Clear();
+
+            for (int i = 0; i < clbType.Items.Count; i++)
+                clbType.SetItemChecked(i, false);
+
+            for (int i = 0; i < clbLocation.Items.Count; i++)
+                clbLocation.SetItemChecked(i, false);
+
+            for (int i = 0; i < clbTags.Items.Count; i++)
+                clbTags.SetItemChecked(i, false);
+
+            dgvEvents.DataSource = null;
+            dgvEvents.DataSource = allEvents;
+        }
+
+        private void monthCalendar1_Leave(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = false;
+        }
+
+        private void monthCalendar2_Leave(object sender, EventArgs e)
+        {
+            monthCalendar2.Visible = false;
+        }
+
+        private void DateStart_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = true;
+            monthCalendar2.Visible = false;
+        }
+
+        private void DateEnd_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = false;
+            monthCalendar2.Visible = true;
+        }
+
+        private void Form1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (!DateStart.Bounds.Contains(e.Location) && !monthCalendar1.Bounds.Contains(e.Location))
+            {
+                monthCalendar1.Visible = false;
+            }
+
+            // Check if click was outside DateEnd and monthCalendar2
+            if (!DateEnd.Bounds.Contains(e.Location) && !monthCalendar2.Bounds.Contains(e.Location))
+            {
+                monthCalendar2.Visible = false;
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = false;
+            monthCalendar2.Visible = false;
+        }
+
+        private void RefreshFilterOptions()
+        {
+            clbType.Items.Clear();
+            clbLocation.Items.Clear();
+            clbTags.Items.Clear();
+
+            var types = allEvents
+                .Select(e => e.Type)
+                .Where(t => !string.IsNullOrWhiteSpace(t))
+                .Distinct()
+                .OrderBy(t => t);
+
+            var locations = allEvents
+                .Select(e => e.Location)
+                .Where(l => !string.IsNullOrWhiteSpace(l))
+                .Distinct()
+                .OrderBy(l => l);
+
+            var tags = allEvents
+                .SelectMany(e => e.Tags)
+                .Where(t => !string.IsNullOrWhiteSpace(t))
+                .Distinct()
+                .OrderBy(t => t);
+
+            foreach (var t in types)
+                clbType.Items.Add(t);
+
+            foreach (var l in locations)
+                clbLocation.Items.Add(l);
+
+            foreach (var tag in tags)
+                clbTags.Items.Add(tag);
+        }
 
     }
 }

@@ -30,9 +30,9 @@ namespace Kalendarz_zdarzen_kulturalnych
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Import = new System.Windows.Forms.Button();
             this.Cultural_Events_Calendar = new System.Windows.Forms.TextBox();
             this.des1 = new System.Windows.Forms.PictureBox();
@@ -44,10 +44,8 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.Apply_Filters = new System.Windows.Forms.Button();
             this.Clear_Filters = new System.Windows.Forms.Button();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.DateStart = new System.Windows.Forms.TextBox();
+            this.DateEnd = new System.Windows.Forms.TextBox();
             this.Upcoming_Events = new System.Windows.Forms.Button();
             this.Past_Events = new System.Windows.Forms.Button();
             this.Add_event = new System.Windows.Forms.Button();
@@ -58,6 +56,11 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.dgvEvents = new System.Windows.Forms.DataGridView();
             this.EksportCal = new System.Windows.Forms.Button();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.monthCalendar2 = new System.Windows.Forms.MonthCalendar();
+            this.clbType = new System.Windows.Forms.CheckedListBox();
+            this.clbTags = new System.Windows.Forms.CheckedListBox();
+            this.clbLocation = new System.Windows.Forms.CheckedListBox();
             ((System.ComponentModel.ISupportInitialize)(this.des1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
@@ -110,6 +113,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.pictureBox1.Size = new System.Drawing.Size(220, 566);
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // textBox1
             // 
@@ -184,6 +188,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.Apply_Filters.TabIndex = 9;
             this.Apply_Filters.Text = "Apply Filters";
             this.Apply_Filters.UseVisualStyleBackColor = false;
+            this.Apply_Filters.Click += new System.EventHandler(this.Apply_Filters_Click);
             // 
             // Clear_Filters
             // 
@@ -198,51 +203,35 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.Clear_Filters.TabIndex = 10;
             this.Clear_Filters.Text = "Clear All Filters";
             this.Clear_Filters.UseVisualStyleBackColor = false;
+            this.Clear_Filters.Click += new System.EventHandler(this.Clear_Filters_Click);
             // 
-            // textBox6
+            // DateStart
             // 
-            this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox6.ForeColor = System.Drawing.Color.Black;
-            this.textBox6.Location = new System.Drawing.Point(26, 297);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(125, 26);
-            this.textBox6.TabIndex = 11;
-            this.textBox6.Enter += new System.EventHandler(this.textBox6_Enter);
-            this.textBox6.Leave += new System.EventHandler(this.textBox6_Leave);
+            this.DateStart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.DateStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DateStart.ForeColor = System.Drawing.Color.Black;
+            this.DateStart.Location = new System.Drawing.Point(26, 297);
+            this.DateStart.Name = "DateStart";
+            this.DateStart.Size = new System.Drawing.Size(125, 26);
+            this.DateStart.TabIndex = 11;
+            this.DateStart.Click += new System.EventHandler(this.DateStart_Click);
+            this.DateStart.TextChanged += new System.EventHandler(this.DateStart_TextChanged);
+            this.DateStart.Enter += new System.EventHandler(this.textBox6_Enter);
+            this.DateStart.Leave += new System.EventHandler(this.textBox6_Leave);
             // 
-            // textBox7
+            // DateEnd
             // 
-            this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox7.ForeColor = System.Drawing.Color.Black;
-            this.textBox7.Location = new System.Drawing.Point(26, 339);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(125, 26);
-            this.textBox7.TabIndex = 12;
-            this.textBox7.Enter += new System.EventHandler(this.textBox7_Enter);
-            this.textBox7.Leave += new System.EventHandler(this.textBox7_Leave);
-            // 
-            // textBox8
-            // 
-            this.textBox8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox8.ForeColor = System.Drawing.Color.Black;
-            this.textBox8.Location = new System.Drawing.Point(26, 410);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(192, 26);
-            this.textBox8.TabIndex = 13;
-            // 
-            // textBox9
-            // 
-            this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox9.ForeColor = System.Drawing.Color.Black;
-            this.textBox9.Location = new System.Drawing.Point(26, 492);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(192, 26);
-            this.textBox9.TabIndex = 14;
-            this.textBox9.TextChanged += new System.EventHandler(this.textBox9_TextChanged);
+            this.DateEnd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.DateEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DateEnd.ForeColor = System.Drawing.Color.Black;
+            this.DateEnd.Location = new System.Drawing.Point(26, 339);
+            this.DateEnd.Name = "DateEnd";
+            this.DateEnd.Size = new System.Drawing.Size(125, 26);
+            this.DateEnd.TabIndex = 12;
+            this.DateEnd.Click += new System.EventHandler(this.DateEnd_Click);
+            this.DateEnd.TextChanged += new System.EventHandler(this.DateEnd_TextChanged);
+            this.DateEnd.Enter += new System.EventHandler(this.textBox7_Enter);
+            this.DateEnd.Leave += new System.EventHandler(this.textBox7_Leave);
             // 
             // Upcoming_Events
             // 
@@ -368,30 +357,30 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.dgvEvents.AllowUserToDeleteRows = false;
             this.dgvEvents.AllowUserToResizeColumns = false;
             this.dgvEvents.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvEvents.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvEvents.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvEvents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvEvents.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvEvents.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEvents.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEvents.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvEvents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvEvents.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEvents.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvEvents.Location = new System.Drawing.Point(247, 149);
             this.dgvEvents.Name = "dgvEvents";
             this.dgvEvents.RowHeadersVisible = false;
@@ -416,12 +405,60 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.EksportCal.UseVisualStyleBackColor = false;
             this.EksportCal.Click += new System.EventHandler(this.EksportCal_Click);
             // 
+            // monthCalendar1
+            // 
+            this.monthCalendar1.Location = new System.Drawing.Point(163, 297);
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.TabIndex = 38;
+            this.monthCalendar1.Visible = false;
+            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
+            this.monthCalendar1.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateSelected);
+            this.monthCalendar1.Leave += new System.EventHandler(this.monthCalendar1_Leave);
+            // 
+            // monthCalendar2
+            // 
+            this.monthCalendar2.Location = new System.Drawing.Point(163, 339);
+            this.monthCalendar2.Name = "monthCalendar2";
+            this.monthCalendar2.TabIndex = 39;
+            this.monthCalendar2.Visible = false;
+            this.monthCalendar2.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar2_DateSelected);
+            this.monthCalendar2.Leave += new System.EventHandler(this.monthCalendar2_Leave);
+            // 
+            // clbType
+            // 
+            this.clbType.FormattingEnabled = true;
+            this.clbType.Location = new System.Drawing.Point(26, 201);
+            this.clbType.Name = "clbType";
+            this.clbType.Size = new System.Drawing.Size(192, 49);
+            this.clbType.TabIndex = 41;
+            // 
+            // clbTags
+            // 
+            this.clbTags.FormattingEnabled = true;
+            this.clbTags.Location = new System.Drawing.Point(26, 492);
+            this.clbTags.Name = "clbTags";
+            this.clbTags.Size = new System.Drawing.Size(192, 49);
+            this.clbTags.TabIndex = 42;
+            // 
+            // clbLocation
+            // 
+            this.clbLocation.FormattingEnabled = true;
+            this.clbLocation.Location = new System.Drawing.Point(26, 408);
+            this.clbLocation.Name = "clbLocation";
+            this.clbLocation.Size = new System.Drawing.Size(192, 49);
+            this.clbLocation.TabIndex = 43;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1265, 681);
+            this.Controls.Add(this.clbLocation);
+            this.Controls.Add(this.clbTags);
+            this.Controls.Add(this.clbType);
+            this.Controls.Add(this.monthCalendar2);
+            this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.EksportCal);
             this.Controls.Add(this.dgvEvents);
             this.Controls.Add(this.pictureBox8);
@@ -432,10 +469,8 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.Controls.Add(this.Add_event);
             this.Controls.Add(this.Past_Events);
             this.Controls.Add(this.Upcoming_Events);
-            this.Controls.Add(this.textBox9);
-            this.Controls.Add(this.textBox8);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.DateEnd);
+            this.Controls.Add(this.DateStart);
             this.Controls.Add(this.Clear_Filters);
             this.Controls.Add(this.Apply_Filters);
             this.Controls.Add(this.textBox5);
@@ -448,8 +483,10 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.Controls.Add(this.Import);
             this.Controls.Add(this.des1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "-*p 5w";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Click += new System.EventHandler(this.Form1_Click);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseClick);
             ((System.ComponentModel.ISupportInitialize)(this.des1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
@@ -472,10 +509,8 @@ namespace Kalendarz_zdarzen_kulturalnych
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Button Apply_Filters;
         private System.Windows.Forms.Button Clear_Filters;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.TextBox DateStart;
+        private System.Windows.Forms.TextBox DateEnd;
         private System.Windows.Forms.Button Upcoming_Events;
         private System.Windows.Forms.Button Past_Events;
         private System.Windows.Forms.Button Add_event;
@@ -486,6 +521,11 @@ namespace Kalendarz_zdarzen_kulturalnych
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.DataGridView dgvEvents;
         private System.Windows.Forms.Button EksportCal;
+        private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.MonthCalendar monthCalendar2;
+        private System.Windows.Forms.CheckedListBox clbType;
+        private System.Windows.Forms.CheckedListBox clbTags;
+        private System.Windows.Forms.CheckedListBox clbLocation;
     }
 }
 
