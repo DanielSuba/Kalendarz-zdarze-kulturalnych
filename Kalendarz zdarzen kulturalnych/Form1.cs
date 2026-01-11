@@ -13,10 +13,15 @@ namespace Kalendarz_zdarzen_kulturalnych
 {
     public partial class Form1 : Form
     {
-        private List<Zdarzenie> events = new List<Zdarzenie>();
+        private List<Zdarzenie> events = new List<Zdarzenie>(); // Origin
         public bool Event_Up=true;
 
-        private List<Zdarzenie> allEvents = new List<Zdarzenie>();
+        private List<Zdarzenie> allEvents = new List<Zdarzenie>(); // Filtrowane
+        private List<Zdarzenie> currentView = new List<Zdarzenie>(); //Sortwanie
+
+        private int currentSortColumnIndex = -1;
+        private bool sortAscending = true;
+
         public Form1()
         {
             InitializeComponent();
@@ -30,6 +35,8 @@ namespace Kalendarz_zdarzen_kulturalnych
             DateEnd.ForeColor = Color.Gray;
             SwitchEvent();
             dgvEvents.AutoGenerateColumns = false;
+
+            // Generacja columnow
 
             dgvEvents.Columns.Add(new DataGridViewTextBoxColumn()
             {
@@ -61,6 +68,15 @@ namespace Kalendarz_zdarzen_kulturalnych
                 HeaderText = "Cost",
                 DataPropertyName = "Cost"
             });
+
+            // Generacja columnow
+            // Sortowanie
+            foreach (DataGridViewColumn col in dgvEvents.Columns)
+            {
+                col.SortMode = DataGridViewColumnSortMode.Programmatic;
+            }
+            // Sortowanie
+            //currentView = allEvents.ToList();
             dgvEvents.EnableHeadersVisualStyles = false;
 
             dgvEvents.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
@@ -181,6 +197,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             LoadFromCsv(ofd.FileName);
             RefreshGrid();
             RefreshFilterOptions();
+            ClearSortGlyphs();
         }
 
         private void LoadFromCsv(string fileName)
@@ -224,8 +241,11 @@ namespace Kalendarz_zdarzen_kulturalnych
             try
             {
                 LoadFromCsv(fileName);
+                allEvents = events.ToList();
+                currentView = allEvents.ToList();
                 RefreshGrid();
                 RefreshFilterOptions();
+                ClearSortGlyphs();
             }
             catch (Exception ex)
             {
@@ -236,6 +256,8 @@ namespace Kalendarz_zdarzen_kulturalnych
                     MessageBoxIcon.Error
                 );
             }
+
+
         }
         private void EksportCal_Click(object sender, EventArgs e)
         {
@@ -305,6 +327,8 @@ namespace Kalendarz_zdarzen_kulturalnych
                 {
                     events.Add(f2.NewEvent);
                     RefreshGrid();
+                    RefreshFilterOptions();
+                    //ClearSortGlyphs();
                 }
             }
         }
@@ -317,6 +341,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             allEvents = events.ToList();
             dgvEvents.DataSource = null;
             dgvEvents.DataSource = events;
+            currentView = allEvents.ToList();
         }
 
         /// <summary>
@@ -373,6 +398,7 @@ namespace Kalendarz_zdarzen_kulturalnych
                 events.Remove(selected);
                 RefreshGrid();
                 RefreshFilterOptions();
+                //ClearSortGlyphs();
             }
         }
 
@@ -445,6 +471,7 @@ namespace Kalendarz_zdarzen_kulturalnych
                 {
                     RefreshGrid();
                     RefreshFilterOptions();
+                    //ClearSortGlyphs();
                 }
             }
         }
@@ -508,13 +535,14 @@ namespace Kalendarz_zdarzen_kulturalnych
             if (selectedLocations.Any())
                 filtered = filtered.Where(e => selectedLocations.Contains(e.Location));
 
-            // Tags filter (event must contain at least ONE selected tag)
+            // Tags filter
             if (selectedTags.Any())
                 filtered = filtered.Where(e =>
                     e.Tags.Any(tag => selectedTags.Contains(tag)));
 
             dgvEvents.DataSource = null;
             dgvEvents.DataSource = filtered.ToList();
+            currentView = filtered.ToList();
         }
 
 
@@ -545,6 +573,9 @@ namespace Kalendarz_zdarzen_kulturalnych
 
             dgvEvents.DataSource = null;
             dgvEvents.DataSource = allEvents;
+
+            currentView = allEvents.ToList();
+            ClearSortGlyphs();
         }
 
         private void monthCalendar1_Leave(object sender, EventArgs e)
@@ -576,7 +607,6 @@ namespace Kalendarz_zdarzen_kulturalnych
                 monthCalendar1.Visible = false;
             }
 
-            // Check if click was outside DateEnd and monthCalendar2
             if (!DateEnd.Bounds.Contains(e.Location) && !monthCalendar2.Bounds.Contains(e.Location))
             {
                 monthCalendar2.Visible = false;
@@ -623,5 +653,72 @@ namespace Kalendarz_zdarzen_kulturalnych
                 clbTags.Items.Add(tag);
         }
 
+
+        // ********************************************************** Filters **********************************************************
+        // ********************************************************** Sort **********************************************************
+
+        private void dgvEvents_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (currentView == null || currentView.Count == 0)
+                return;
+
+            if (currentSortColumnIndex == e.ColumnIndex)
+                sortAscending = !sortAscending;
+            else
+            {
+                currentSortColumnIndex = e.ColumnIndex;
+                sortAscending = true;
+            }
+
+            ApplySorting();
+        }
+        private void ApplySorting()
+        {
+            if (currentView == null || currentView.Count == 0)
+                return;
+
+            if (currentSortColumnIndex < 0)
+                return;
+
+            string dataProperty =
+                dgvEvents.Columns[currentSortColumnIndex].DataPropertyName;
+
+            Func<Zdarzenie, object> keySelector = null;
+
+            if (dataProperty == "Title")
+                keySelector = e => e.Title;
+            else if (dataProperty == "DateTimeDisplay")
+                keySelector = e => e.Date;
+            else if (dataProperty == "Location")
+                keySelector = e => e.Location;
+            else if (dataProperty == "Type")
+                keySelector = e => e.Type;
+            else if (dataProperty == "Cost")
+                keySelector = e => e.Cost;
+
+            if (keySelector == null)
+                return;
+
+            currentView = sortAscending
+                ? currentView.OrderBy(keySelector).ToList()
+                : currentView.OrderByDescending(keySelector).ToList();
+
+            dgvEvents.DataSource = null;
+            dgvEvents.DataSource = currentView;
+
+            foreach (DataGridViewColumn col in dgvEvents.Columns)
+                col.HeaderCell.SortGlyphDirection = SortOrder.None;
+
+            dgvEvents.Columns[currentSortColumnIndex]
+                .HeaderCell.SortGlyphDirection =
+                    sortAscending ? SortOrder.Ascending : SortOrder.Descending;
+        }
+        private void ClearSortGlyphs()
+        {
+            foreach (DataGridViewColumn col in dgvEvents.Columns)
+                col.HeaderCell.SortGlyphDirection = SortOrder.None;
+        }
+
+        // ********************************************************** Sort **********************************************************
     }
 }

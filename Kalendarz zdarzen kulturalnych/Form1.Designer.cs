@@ -389,6 +389,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.dgvEvents.Size = new System.Drawing.Size(1005, 461);
             this.dgvEvents.TabIndex = 36;
             this.dgvEvents.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEvents_CellContentClick);
+            this.dgvEvents.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvEvents_ColumnHeaderMouseClick);
             // 
             // EksportCal
             // 
