@@ -20,6 +20,16 @@ namespace Kalendarz_zdarzen_kulturalnych
         public Form2()
         {
             InitializeComponent();
+            Newevent.Enabled = false;
+
+            Event_title.TextChanged += (s, e) => ValidateForm();
+            textBox7.TextChanged += (s, e) => ValidateForm();
+            txtTime.TextChanged += (s, e) => ValidateForm();
+            txtTimeEnd.TextChanged += (s, e) => ValidateForm();
+            txt_Location.TextChanged += (s, e) => ValidateForm();
+            txt_Type.TextChanged += (s, e) => ValidateForm();
+            txt_Cost.TextChanged += (s, e) => ValidateForm();
+            Description.TextChanged += (s, e) => ValidateForm();
         }
   
         private void Newevent_Click(object sender, EventArgs e)
@@ -187,6 +197,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             txt_Cost.Text = editingEvent.Cost.ToString();
             Tagslist.Text = string.Join(", ", editingEvent.Tags);
             Description.Text = editingEvent.Description;
+            ValidateForm();
         }
 
         private void FillEvent(Zdarzenie ev)
@@ -206,5 +217,37 @@ namespace Kalendarz_zdarzen_kulturalnych
                 .ToList();
         }
 
+        private void Back_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void ValidateForm()
+        {
+            Newevent.Enabled =
+                !string.IsNullOrWhiteSpace(Event_title.Text) &&
+                !string.IsNullOrWhiteSpace(textBox7.Text) &&
+                !string.IsNullOrWhiteSpace(txtTime.Text) &&
+                !string.IsNullOrWhiteSpace(txtTimeEnd.Text) &&
+                !string.IsNullOrWhiteSpace(txt_Location.Text) &&
+                !string.IsNullOrWhiteSpace(txt_Type.Text) &&
+                !string.IsNullOrWhiteSpace(txt_Cost.Text) &&
+                !string.IsNullOrWhiteSpace(Description.Text);
+        }
+
+        private void txt_Cost_TextChanged(object sender, EventArgs e)
+        {
+            decimal cost;
+            txt_Cost.BackColor = decimal.TryParse(txt_Cost.Text, out cost)
+                ? Color.White
+                : Color.MistyRose;
+
+            ValidateForm();
+        }
+
+        private void textBox7_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

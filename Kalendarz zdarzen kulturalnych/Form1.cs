@@ -198,6 +198,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             RefreshGrid();
             RefreshFilterOptions();
             ClearSortGlyphs();
+            UpdateRowColors();
         }
 
         private void LoadFromCsv(string fileName)
@@ -246,6 +247,7 @@ namespace Kalendarz_zdarzen_kulturalnych
                 RefreshGrid();
                 RefreshFilterOptions();
                 ClearSortGlyphs();
+                UpdateRowColors();
             }
             catch (Exception ex)
             {
@@ -317,6 +319,7 @@ namespace Kalendarz_zdarzen_kulturalnych
         private void Import_Click(object sender, EventArgs e)
         {
             LoadFromCsvWithBackup();
+
         }
 
         private void Add_event_Click(object sender, EventArgs e)
@@ -328,7 +331,8 @@ namespace Kalendarz_zdarzen_kulturalnych
                     events.Add(f2.NewEvent);
                     RefreshGrid();
                     RefreshFilterOptions();
-                    //ClearSortGlyphs();
+                    ClearSortGlyphs();
+                    UpdateRowColors();
                 }
             }
         }
@@ -471,7 +475,8 @@ namespace Kalendarz_zdarzen_kulturalnych
                 {
                     RefreshGrid();
                     RefreshFilterOptions();
-                    //ClearSortGlyphs();
+                    ClearSortGlyphs();
+                    UpdateRowColors();
                 }
             }
         }
@@ -555,6 +560,7 @@ namespace Kalendarz_zdarzen_kulturalnych
         private void Apply_Filters_Click(object sender, EventArgs e)
         {
             ApplyDateFilter();
+            UpdateRowColors();
         }
 
         private void Clear_Filters_Click(object sender, EventArgs e)
@@ -576,6 +582,7 @@ namespace Kalendarz_zdarzen_kulturalnych
 
             currentView = allEvents.ToList();
             ClearSortGlyphs();
+            UpdateRowColors();
         }
 
         private void monthCalendar1_Leave(object sender, EventArgs e)
@@ -720,5 +727,74 @@ namespace Kalendarz_zdarzen_kulturalnych
         }
 
         // ********************************************************** Sort **********************************************************
+
+        // ********************************************************** Date colors **********************************************************
+        private DateTime GetEventEndDateTime(Zdarzenie e)
+        {
+            TimeSpan end;
+            TimeSpan.TryParse(e.TimeEnd, out end);
+            return e.Date.Date.Add(end);
+        }
+
+        private bool TimesOverlap(Zdarzenie a, Zdarzenie b)
+        {
+            TimeSpan aStart, aEnd, bStart, bEnd;
+
+            TimeSpan.TryParse(a.TimeStart, out aStart);
+            TimeSpan.TryParse(a.TimeEnd, out aEnd);
+            TimeSpan.TryParse(b.TimeStart, out bStart);
+            TimeSpan.TryParse(b.TimeEnd, out bEnd);
+
+            return aStart < bEnd && bStart < aEnd;
+        }
+
+        private void UpdateRowColors()
+        {
+            if (dgvEvents.Rows.Count == 0)
+                return;
+
+            var view = dgvEvents.DataSource as List<Zdarzenie>;
+            if (view == null)
+                return;
+
+            DateTime now = DateTime.Now;
+
+            foreach (DataGridViewRow row in dgvEvents.Rows)
+                row.DefaultCellStyle.ForeColor = Color.Black;
+
+            for (int i = 0; i < view.Count; i++)
+            {
+                if (GetEventEndDateTime(view[i]) < now)
+                {
+                    dgvEvents.Rows[i].DefaultCellStyle.ForeColor = Color.Red;
+                }
+            }
+
+            for (int i = 0; i < view.Count; i++)
+            {
+                if (GetEventEndDateTime(view[i]) < now)
+                    continue;
+
+                for (int j = i + 1; j < view.Count; j++)
+                {
+                    if (GetEventEndDateTime(view[j]) < now)
+                        continue;
+
+                    if (view[i].Date.Date != view[j].Date.Date)
+                        continue;
+
+                    if (TimesOverlap(view[i], view[j]))
+                    {
+                        if (dgvEvents.Rows[i].DefaultCellStyle.ForeColor != Color.Red)
+                            dgvEvents.Rows[i].DefaultCellStyle.ForeColor = Color.Goldenrod;
+
+                        if (dgvEvents.Rows[j].DefaultCellStyle.ForeColor != Color.Red)
+                            dgvEvents.Rows[j].DefaultCellStyle.ForeColor = Color.Goldenrod;
+                    }
+                }
+            }
+        }
+
+        // ********************************************************** Date colors **********************************************************
     }
 }

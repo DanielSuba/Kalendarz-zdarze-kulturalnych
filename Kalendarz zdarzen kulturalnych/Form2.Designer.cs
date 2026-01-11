@@ -197,6 +197,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.textBox7.Size = new System.Drawing.Size(190, 26);
             this.textBox7.TabIndex = 27;
             this.textBox7.Click += new System.EventHandler(this.textBox7_Click);
+            this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
             // 
             // txtTime
             // 
@@ -242,6 +243,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.txt_Cost.Name = "txt_Cost";
             this.txt_Cost.Size = new System.Drawing.Size(190, 26);
             this.txt_Cost.TabIndex = 31;
+            this.txt_Cost.TextChanged += new System.EventHandler(this.txt_Cost_TextChanged);
             // 
             // Back
             // 
@@ -256,6 +258,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             this.Back.TabIndex = 32;
             this.Back.Text = "Back";
             this.Back.UseVisualStyleBackColor = false;
+            this.Back.Click += new System.EventHandler(this.Back_Click);
             // 
             // pictureBox2
             // 
