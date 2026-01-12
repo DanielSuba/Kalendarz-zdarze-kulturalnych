@@ -583,6 +583,13 @@ namespace Kalendarz_zdarzen_kulturalnych
             currentView = allEvents.ToList();
             ClearSortGlyphs();
             UpdateRowColors();
+            
+            DateStart.Text = "YYYY/MM/DD";
+            DateStart.ForeColor = Color.Gray;
+            DateEnd.Text = "YYYY/MM/DD";
+            DateEnd.ForeColor = Color.Gray;
+            monthCalendar1.Visible = false;
+            monthCalendar2.Visible = false;
         }
 
         private void monthCalendar1_Leave(object sender, EventArgs e)
@@ -719,6 +726,8 @@ namespace Kalendarz_zdarzen_kulturalnych
             dgvEvents.Columns[currentSortColumnIndex]
                 .HeaderCell.SortGlyphDirection =
                     sortAscending ? SortOrder.Ascending : SortOrder.Descending;
+
+            UpdateRowColors();
         }
         private void ClearSortGlyphs()
         {

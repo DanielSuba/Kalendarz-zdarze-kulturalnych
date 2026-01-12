@@ -22,3 +22,16 @@ C:\Users\ITwork\Documents\GitHub\Kalendarz-zdarze-kulturalnych\Kalendarz zdarzen
 C:\Users\ITwork\Documents\GitHub\Kalendarz-zdarze-kulturalnych\Kalendarz zdarzen kulturalnych\obj\Debug\Kalendarz zdarzen kulturalnych.csproj.CoreCompileInputs.cache
 C:\Users\ITwork\Documents\GitHub\Kalendarz-zdarze-kulturalnych\Kalendarz zdarzen kulturalnych\obj\Debug\Kalendarz zdarzen kulturalnych.exe
 C:\Users\ITwork\Documents\GitHub\Kalendarz-zdarze-kulturalnych\Kalendarz zdarzen kulturalnych\obj\Debug\Kalendarz zdarzen kulturalnych.pdb
+C:\Users\danie\Documents\GitHub\Kalendarz-zdarze-kulturalnych\Kalendarz zdarzen kulturalnych\bin\Debug\Kalendarz zdarzen kulturalnych.exe.config
+C:\Users\danie\Documents\GitHub\Kalendarz-zdarze-kulturalnych\Kalendarz zdarzen kulturalnych\bin\Debug\Kalendarz zdarzen kulturalnych.exe
+C:\Users\danie\Documents\GitHub\Kalendarz-zdarze-kulturalnych\Kalendarz zdarzen kulturalnych\bin\Debug\Kalendarz zdarzen kulturalnych.pdb
+C:\Users\danie\Documents\GitHub\Kalendarz-zdarze-kulturalnych\Kalendarz zdarzen kulturalnych\obj\Debug\Kalendarz zdarzen kulturalnych.csproj.AssemblyReference.cache
+C:\Users\danie\Documents\GitHub\Kalendarz-zdarze-kulturalnych\Kalendarz zdarzen kulturalnych\obj\Debug\Kalendarz zdarzen kulturalnych.exe.config
+C:\Users\danie\Documents\GitHub\Kalendarz-zdarze-kulturalnych\Kalendarz zdarzen kulturalnych\obj\Debug\Kalendarz_zdarzen_kulturalnych.Day.resources
+C:\Users\danie\Documents\GitHub\Kalendarz-zdarze-kulturalnych\Kalendarz zdarzen kulturalnych\obj\Debug\Kalendarz_zdarzen_kulturalnych.Form1.resources
+C:\Users\danie\Documents\GitHub\Kalendarz-zdarze-kulturalnych\Kalendarz zdarzen kulturalnych\obj\Debug\Kalendarz_zdarzen_kulturalnych.Form2.resources
+C:\Users\danie\Documents\GitHub\Kalendarz-zdarze-kulturalnych\Kalendarz zdarzen kulturalnych\obj\Debug\Kalendarz_zdarzen_kulturalnych.Properties.Resources.resources
+C:\Users\danie\Documents\GitHub\Kalendarz-zdarze-kulturalnych\Kalendarz zdarzen kulturalnych\obj\Debug\Kalendarz zdarzen kulturalnych.csproj.GenerateResource.cache
+C:\Users\danie\Documents\GitHub\Kalendarz-zdarze-kulturalnych\Kalendarz zdarzen kulturalnych\obj\Debug\Kalendarz zdarzen kulturalnych.csproj.CoreCompileInputs.cache
+C:\Users\danie\Documents\GitHub\Kalendarz-zdarze-kulturalnych\Kalendarz zdarzen kulturalnych\obj\Debug\Kalendarz zdarzen kulturalnych.exe
+C:\Users\danie\Documents\GitHub\Kalendarz-zdarze-kulturalnych\Kalendarz zdarzen kulturalnych\obj\Debug\Kalendarz zdarzen kulturalnych.pdb

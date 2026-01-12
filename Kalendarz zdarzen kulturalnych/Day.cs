@@ -98,5 +98,10 @@ namespace Kalendarz_zdarzen_kulturalnych
         {
 
         }
+
+        private void Back_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
