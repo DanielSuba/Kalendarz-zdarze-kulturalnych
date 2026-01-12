@@ -3,28 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\danie\\Documents\\GitHub\\Kalendarz-zdarze-kulturalnych\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C0493E86-2839-48C6-82D2-AE3B87004CC4}|Kalendarz zdarzen kulturalnych\\Kalendarz zdarzen kulturalnych.csproj|c:\\users\\danie\\documents\\github\\kalendarz-zdarze-kulturalnych\\kalendarz zdarzen kulturalnych\\day.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C0493E86-2839-48C6-82D2-AE3B87004CC4}|Kalendarz zdarzen kulturalnych\\Kalendarz zdarzen kulturalnych.csproj|solutionrelative:kalendarz zdarzen kulturalnych\\day.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C0493E86-2839-48C6-82D2-AE3B87004CC4}|Kalendarz zdarzen kulturalnych\\Kalendarz zdarzen kulturalnych.csproj|c:\\users\\danie\\documents\\github\\kalendarz-zdarze-kulturalnych\\kalendarz zdarzen kulturalnych\\zdarzenie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C0493E86-2839-48C6-82D2-AE3B87004CC4}|Kalendarz zdarzen kulturalnych\\Kalendarz zdarzen kulturalnych.csproj|solutionrelative:kalendarz zdarzen kulturalnych\\zdarzenie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C0493E86-2839-48C6-82D2-AE3B87004CC4}|Kalendarz zdarzen kulturalnych\\Kalendarz zdarzen kulturalnych.csproj|c:\\users\\danie\\documents\\github\\kalendarz-zdarze-kulturalnych\\kalendarz zdarzen kulturalnych\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C0493E86-2839-48C6-82D2-AE3B87004CC4}|Kalendarz zdarzen kulturalnych\\Kalendarz zdarzen kulturalnych.csproj|solutionrelative:kalendarz zdarzen kulturalnych\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C0493E86-2839-48C6-82D2-AE3B87004CC4}|Kalendarz zdarzen kulturalnych\\Kalendarz zdarzen kulturalnych.csproj|c:\\users\\danie\\documents\\github\\kalendarz-zdarze-kulturalnych\\kalendarz zdarzen kulturalnych\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C0493E86-2839-48C6-82D2-AE3B87004CC4}|Kalendarz zdarzen kulturalnych\\Kalendarz zdarzen kulturalnych.csproj|solutionrelative:kalendarz zdarzen kulturalnych\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C0493E86-2839-48C6-82D2-AE3B87004CC4}|Kalendarz zdarzen kulturalnych\\Kalendarz zdarzen kulturalnych.csproj|c:\\users\\danie\\documents\\github\\kalendarz-zdarze-kulturalnych\\kalendarz zdarzen kulturalnych\\day.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{C0493E86-2839-48C6-82D2-AE3B87004CC4}|Kalendarz zdarzen kulturalnych\\Kalendarz zdarzen kulturalnych.csproj|C:\\Users\\danie\\Documents\\GitHub\\Kalendarz-zdarze-kulturalnych\\kalendarz zdarzen kulturalnych\\day.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{C0493E86-2839-48C6-82D2-AE3B87004CC4}|Kalendarz zdarzen kulturalnych\\Kalendarz zdarzen kulturalnych.csproj|solutionrelative:kalendarz zdarzen kulturalnych\\day.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C0493E86-2839-48C6-82D2-AE3B87004CC4}|Kalendarz zdarzen kulturalnych\\Kalendarz zdarzen kulturalnych.csproj|c:\\users\\danie\\documents\\github\\kalendarz-zdarze-kulturalnych\\kalendarz zdarzen kulturalnych\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C0493E86-2839-48C6-82D2-AE3B87004CC4}|Kalendarz zdarzen kulturalnych\\Kalendarz zdarzen kulturalnych.csproj|solutionrelative:kalendarz zdarzen kulturalnych\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C0493E86-2839-48C6-82D2-AE3B87004CC4}|Kalendarz zdarzen kulturalnych\\Kalendarz zdarzen kulturalnych.csproj|C:\\Users\\danie\\Documents\\GitHub\\Kalendarz-zdarze-kulturalnych\\kalendarz zdarzen kulturalnych\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C0493E86-2839-48C6-82D2-AE3B87004CC4}|Kalendarz zdarzen kulturalnych\\Kalendarz zdarzen kulturalnych.csproj|solutionrelative:kalendarz zdarzen kulturalnych\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C0493E86-2839-48C6-82D2-AE3B87004CC4}|Kalendarz zdarzen kulturalnych\\Kalendarz zdarzen kulturalnych.csproj|c:\\users\\danie\\documents\\github\\kalendarz-zdarze-kulturalnych\\kalendarz zdarzen kulturalnych\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{C0493E86-2839-48C6-82D2-AE3B87004CC4}|Kalendarz zdarzen kulturalnych\\Kalendarz zdarzen kulturalnych.csproj|solutionrelative:kalendarz zdarzen kulturalnych\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C0493E86-2839-48C6-82D2-AE3B87004CC4}|Kalendarz zdarzen kulturalnych\\Kalendarz zdarzen kulturalnych.csproj|C:\\Users\\danie\\Documents\\GitHub\\Kalendarz-zdarze-kulturalnych\\kalendarz zdarzen kulturalnych\\day.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C0493E86-2839-48C6-82D2-AE3B87004CC4}|Kalendarz zdarzen kulturalnych\\Kalendarz zdarzen kulturalnych.csproj|solutionrelative:kalendarz zdarzen kulturalnych\\day.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C0493E86-2839-48C6-82D2-AE3B87004CC4}|Kalendarz zdarzen kulturalnych\\Kalendarz zdarzen kulturalnych.csproj|C:\\Users\\danie\\Documents\\GitHub\\Kalendarz-zdarze-kulturalnych\\kalendarz zdarzen kulturalnych\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C0493E86-2839-48C6-82D2-AE3B87004CC4}|Kalendarz zdarzen kulturalnych\\Kalendarz zdarzen kulturalnych.csproj|solutionrelative:kalendarz zdarzen kulturalnych\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C0493E86-2839-48C6-82D2-AE3B87004CC4}|Kalendarz zdarzen kulturalnych\\Kalendarz zdarzen kulturalnych.csproj|C:\\Users\\danie\\Documents\\GitHub\\Kalendarz-zdarze-kulturalnych\\kalendarz zdarzen kulturalnych\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C0493E86-2839-48C6-82D2-AE3B87004CC4}|Kalendarz zdarzen kulturalnych\\Kalendarz zdarzen kulturalnych.csproj|solutionrelative:kalendarz zdarzen kulturalnych\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,7 +46,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "Zdarzenie.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\Documents\\GitHub\\Kalendarz-zdarze-kulturalnych\\Kalendarz zdarzen kulturalnych\\Zdarzenie.cs",
+              "RelativeDocumentMoniker": "Kalendarz zdarzen kulturalnych\\Zdarzenie.cs",
+              "ToolTip": "C:\\Users\\danie\\Documents\\GitHub\\Kalendarz-zdarze-kulturalnych\\Kalendarz zdarzen kulturalnych\\Zdarzenie.cs",
+              "RelativeToolTip": "Kalendarz zdarzen kulturalnych\\Zdarzenie.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-12T15:22:33.425Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "Form2.cs",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\GitHub\\Kalendarz-zdarze-kulturalnych\\Kalendarz zdarzen kulturalnych\\Form2.cs",
               "RelativeDocumentMoniker": "Kalendarz zdarzen kulturalnych\\Form2.cs",
@@ -55,7 +72,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "Day.cs",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\GitHub\\Kalendarz-zdarze-kulturalnych\\Kalendarz zdarzen kulturalnych\\Day.cs",
               "RelativeDocumentMoniker": "Kalendarz zdarzen kulturalnych\\Day.cs",
@@ -68,7 +85,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\GitHub\\Kalendarz-zdarze-kulturalnych\\Kalendarz zdarzen kulturalnych\\Form1.cs",
               "RelativeDocumentMoniker": "Kalendarz zdarzen kulturalnych\\Form1.cs",
@@ -81,7 +98,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "Day.cs [Design]",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\GitHub\\Kalendarz-zdarze-kulturalnych\\Kalendarz zdarzen kulturalnych\\Day.cs",
               "RelativeDocumentMoniker": "Kalendarz zdarzen kulturalnych\\Day.cs",
@@ -105,7 +122,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\GitHub\\Kalendarz-zdarze-kulturalnych\\Kalendarz zdarzen kulturalnych\\Form1.cs",
               "RelativeDocumentMoniker": "Kalendarz zdarzen kulturalnych\\Form1.cs",
