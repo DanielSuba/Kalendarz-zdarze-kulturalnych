@@ -6,7 +6,7 @@ Id;Title;Date;TimeStart;TimeEnd;Location;Type;Cost;Description;Tags
 5;Pokaz filmowy;2026-02-09;17:00;19:00;Kino Centrum;Film;25;Pokaz filmu niezależnego;film,kino,pokaz
 6;Spotkanie autorskie;2026-02-10;16:00;18:00;Biblioteka;Literatura;0;Spotkanie z pisarzem;książki,literatura,autor
 7;Festiwal muzyczny;2026-02-11;14:00;23:00;Rynek Główny;Festiwal;120;Całodniowy festiwal muzyczny;muzyka,festiwal,plener
-8;Wykład historyczny;2026-02-12;11:00;12:30;Uniwersytet;Wykład;0;Wykład o historii regionu;historia,edukacja,wykład
+8;Wykład historyczny;2026-02-12;09:00;12:30;Uniwersytet;Wykład;0;Wykład o historii regionu;historia,edukacja,wykład
 9;Koncert rockowy;2026-02-13;19:00;22:00;Hala Sportowa;Muzyka;80;Energetyczny koncert rockowy;rock,muzyka,koncert
 10;Targi książki;2026-02-14;10:00;18:00;Centrum Expo;Targi;15;Coroczne targi książki;książki,targi,literatura
 11;Plener fotograficzny;2026-02-15;08:00;12:00;Park Miejski;Fotografia;0;Plener fotograficzny dla amatorów;fotografia,plener,sztuka
@@ -19,3 +19,5 @@ Id;Title;Date;TimeStart;TimeEnd;Location;Type;Cost;Description;Tags
 18;Wernisaż;2026-02-22;18:00;20:00;Galeria Sztuki;Wernisaż;0;Otwarcie nowej wystawy;wernisaż,sztuka,galeria
 19;Spotkanie klubowe;2026-02-23;17:00;19:00;Klub Kultury;Spotkanie;10;Spotkanie klubu miłośników sztuki;spotkanie,klub,kultura
 20;Festiwal filmowy;2026-02-24;11:00;22:00;Kino Studyjne;Festiwal;150;Festiwal filmów europejskich;film,festiwal,kino
+21;Festiwal;2026-01-01;10:00;12:00;Polska;Festiwal;0;Alala;Fest
+22;Wystawa;2026-02-09;18:00;20:00;Polska;Wystawa;40;lol;balet,autor

@@ -13,9 +13,9 @@ namespace Kalendarz_zdarzen_kulturalnych
 {
     public partial class Form1 : Form
     {
-        private List<Zdarzenie> events = new List<Zdarzenie>(); // Origin
         public bool Event_Up=true;
-
+        
+        private List<Zdarzenie> events = new List<Zdarzenie>(); // Origin
         private List<Zdarzenie> allEvents = new List<Zdarzenie>(); // Filtrowane
         private List<Zdarzenie> currentView = new List<Zdarzenie>(); //Sortwanie
 
@@ -463,8 +463,8 @@ namespace Kalendarz_zdarzen_kulturalnych
         }
 
         // ********************************************************** Export event TXT **********************************************************
-
-        // ********************************************************** Filters **********************************************************
+        
+        // text box date
         private void DateStart_TextChanged(object sender, EventArgs e)
         {
             monthCalendar1.Visible = true;
@@ -490,6 +490,15 @@ namespace Kalendarz_zdarzen_kulturalnych
             DateEnd.Text = e.Start.ToString("yyyy-MM-dd");
             monthCalendar2.Visible = false;
         }
+        private void Form1_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = false;
+            monthCalendar2.Visible = false;
+        }
+
+        // text box date
+        // ********************************************************** Filters **********************************************************
+
 
         private void ApplyDateFilter()
         {
@@ -526,13 +535,6 @@ namespace Kalendarz_zdarzen_kulturalnych
             dgvEvents.DataSource = null;
             dgvEvents.DataSource = filtered.ToList();
             currentView = filtered.ToList();
-        }
-
-
-        private void Form1_Click(object sender, EventArgs e)
-        {
-            monthCalendar1.Visible = false;
-            monthCalendar2.Visible = false;
         }
         
         private void Apply_Filters_Click(object sender, EventArgs e)
