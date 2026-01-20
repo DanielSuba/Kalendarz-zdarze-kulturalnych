@@ -75,13 +75,7 @@ namespace Kalendarz_zdarzen_kulturalnych
                 col.SortMode = DataGridViewColumnSortMode.Programmatic;
             }
             // Sortowanie
-            //currentView = allEvents.ToList();
             dgvEvents.EnableHeadersVisualStyles = false;
-
-            dgvEvents.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
-            dgvEvents.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
-            dgvEvents.ColumnHeadersDefaultCellStyle.Font =
-                new Font("Segoe UI", 10, FontStyle.Bold);
 
             LoadDataOnStartup();
 
@@ -289,7 +283,6 @@ namespace Kalendarz_zdarzen_kulturalnych
         private void Import_Click(object sender, EventArgs e)
         {
             LoadFromCsvWithBackup();
-
         }
 
         private void Add_event_Click(object sender, EventArgs e)
@@ -552,8 +545,9 @@ namespace Kalendarz_zdarzen_kulturalnych
             dgvEvents.DataSource = allEvents;
 
             currentView = allEvents.ToList();
-            ClearSortGlyphs();
-            UpdateRowColors();
+            //ClearSortGlyphs();
+            //UpdateRowColors();
+            Clear_Datagrid();
         }
 
         private void monthCalendar1_Leave(object sender, EventArgs e)
@@ -690,6 +684,8 @@ namespace Kalendarz_zdarzen_kulturalnych
             dgvEvents.Columns[currentSortColumnIndex]
                 .HeaderCell.SortGlyphDirection =
                     sortAscending ? SortOrder.Ascending : SortOrder.Descending;
+
+            UpdateRowColors();
         }
         private void ClearSortGlyphs()
         {
@@ -731,13 +727,13 @@ namespace Kalendarz_zdarzen_kulturalnych
             DateTime now = DateTime.Now;
 
             foreach (DataGridViewRow row in dgvEvents.Rows)
-                row.DefaultCellStyle.ForeColor = Color.Black;
+                row.DefaultCellStyle.BackColor = Color.White;
 
             for (int i = 0; i < view.Count; i++)
             {
                 if (GetEventEndDateTime(view[i]) < now)
                 {
-                    dgvEvents.Rows[i].DefaultCellStyle.ForeColor = Color.Red;
+                    dgvEvents.Rows[i].DefaultCellStyle.BackColor = Color.LightCoral;
                 }
             }
 
@@ -756,11 +752,11 @@ namespace Kalendarz_zdarzen_kulturalnych
 
                     if (TimesOverlap(view[i], view[j]))
                     {
-                        if (dgvEvents.Rows[i].DefaultCellStyle.ForeColor != Color.Red)
-                            dgvEvents.Rows[i].DefaultCellStyle.ForeColor = Color.Goldenrod;
+                        if (dgvEvents.Rows[i].DefaultCellStyle.BackColor != Color.LightCoral)
+                            dgvEvents.Rows[i].DefaultCellStyle.BackColor = Color.Khaki;
 
-                        if (dgvEvents.Rows[j].DefaultCellStyle.ForeColor != Color.Red)
-                            dgvEvents.Rows[j].DefaultCellStyle.ForeColor = Color.Goldenrod;
+                        if (dgvEvents.Rows[j].DefaultCellStyle.BackColor != Color.LightCoral)
+                            dgvEvents.Rows[j].DefaultCellStyle.BackColor = Color.Khaki;
                     }
                 }
             }
