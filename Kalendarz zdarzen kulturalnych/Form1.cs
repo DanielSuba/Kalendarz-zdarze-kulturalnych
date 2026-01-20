@@ -21,7 +21,7 @@ namespace Kalendarz_zdarzen_kulturalnych
 
         private int currentSortColumnIndex = -1;
         private bool sortAscending = true;
-
+        private bool isSaved = false;
         public Form1()
         {
             InitializeComponent();
@@ -77,17 +77,18 @@ namespace Kalendarz_zdarzen_kulturalnych
             // Sortowanie
             dgvEvents.EnableHeadersVisualStyles = false;
 
+            //Ladowanie daty na poczatku
             LoadDataOnStartup();
+
+            //Enable obslugi skrotow klawiszowych
+            this.KeyPreview = true;
 
             monthCalendar1.Visible = false;
             monthCalendar2.Visible = false;
 
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        
         private void textBox6_Enter(object sender, EventArgs e)
         {
             monthCalendar1.Location = new Point(DateStart.Left, DateStart.Bottom);
@@ -126,16 +127,23 @@ namespace Kalendarz_zdarzen_kulturalnych
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
+            //Save
             if (keyData == (Keys.Control | Keys.S))
             {
                 SaveToCsv("data.csv");
                 MessageBox.Show("Data saved successfully.");
                 return true;
             }
-
+            //Load
             if (keyData == (Keys.Control | Keys.E))
             {
                 LoadFromCsvWithBackup();
+                return true;
+            }
+            //Legacy Sort
+            if (keyData == (Keys.Control | Keys.B))
+            {
+                SortByTitleBubble();
                 return true;
             }
 
@@ -158,6 +166,7 @@ namespace Kalendarz_zdarzen_kulturalnych
                     );
                 }
             }
+            isSaved = true;
         }
 
         private string GetNextBackupFileName()
@@ -253,7 +262,10 @@ namespace Kalendarz_zdarzen_kulturalnych
             SaveToCsv("data.csv");
             MessageBox.Show("Data saved successfully.");
         }
-
+        private void Import_Click(object sender, EventArgs e)
+        {
+            LoadFromCsvWithBackup();
+        }
         // ********************************************************** CSV **********************************************************
 
         private void textBox7_Leave(object sender, EventArgs e)
@@ -264,27 +276,7 @@ namespace Kalendarz_zdarzen_kulturalnych
                 DateEnd.ForeColor = Color.Gray;
             }
         }
-
-        private void textBox9_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Upcoming_Events_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void Past_Events_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void Import_Click(object sender, EventArgs e)
-        {
-            LoadFromCsvWithBackup();
-        }
-
+        
         private void Add_event_Click(object sender, EventArgs e)
         {
             using (Form2 f2 = new Form2())
@@ -309,12 +301,13 @@ namespace Kalendarz_zdarzen_kulturalnych
         }
         private void Clear_Datagrid()
         {
-            RefreshGrid();
-            RefreshFilterOptions();
-            ClearSortGlyphs();
-            UpdateRowColors();
-            monthCalendar1.Visible = false;
+            RefreshGrid(); // Odnawia datagrid
+            RefreshFilterOptions(); // Odnawia filtry
+            ClearSortGlyphs(); // czyści strzałki sortowania
+            UpdateRowColors(); // Zmienia kolory
+            monthCalendar1.Visible = false; 
             monthCalendar2.Visible = false;
+            isSaved = false;
         }
         /// <summary>
         /// ////////////////////////////////Update/////////////////////////////////
@@ -333,6 +326,22 @@ namespace Kalendarz_zdarzen_kulturalnych
 
             Day dayForm = new Day(selectedEvent, events, this);
             dayForm.Show();
+        }
+
+        // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx To co nie potrzebne xxxxxxxxxxxxxxxxxxxxx
+        private void textBox9_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Upcoming_Events_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void Past_Events_Click(object sender, EventArgs e)
+        {
+            
         }
 
         private void pictureBox7_Click(object sender, EventArgs e)
@@ -359,7 +368,24 @@ namespace Kalendarz_zdarzen_kulturalnych
         {
 
         }
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
 
+        }
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox8_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        {
+
+        }
+        // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx To co nie potrzebne xxxxxxxxxxxxxxxxxxxxx
         // ********************************************************** Delete Event **********************************************************
 
         private void Delete_Event_Click(object sender, EventArgs e)
@@ -374,15 +400,7 @@ namespace Kalendarz_zdarzen_kulturalnych
 
         // ********************************************************** Delete Event **********************************************************
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox8_Click(object sender, EventArgs e)
-        {
-
-        }
+        
 
         
 
@@ -459,10 +477,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             monthCalendar2.BringToFront();
         }
 
-        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
-        {
-
-        }
+        
 
         private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
         {
@@ -531,7 +546,8 @@ namespace Kalendarz_zdarzen_kulturalnych
             DateStart.Clear();
             DateEnd.Clear();
             txtSearch.Clear();
-
+           
+            // Czysci filtry
             for (int i = 0; i < clbType.Items.Count; i++)
                 clbType.SetItemChecked(i, false);
 
@@ -545,8 +561,6 @@ namespace Kalendarz_zdarzen_kulturalnych
             dgvEvents.DataSource = allEvents;
 
             currentView = allEvents.ToList();
-            //ClearSortGlyphs();
-            //UpdateRowColors();
             Clear_Datagrid();
         }
 
@@ -695,6 +709,53 @@ namespace Kalendarz_zdarzen_kulturalnych
 
         // ********************************************************** Sort **********************************************************
 
+        // ********************************************************** Legacy bubble Sort **********************************************************
+        private void BubbleSortByTitle(List<Zdarzenie> list)
+        {
+            int n = list.Count;
+            bool swapped;
+
+            for (int i = 0; i < n - 1; i++)
+            {
+                swapped = false;
+
+                for (int j = 0; j < n - i - 1; j++)
+                {
+                    if (string.Compare(
+                            list[j].Title,
+                            list[j + 1].Title,
+                            StringComparison.OrdinalIgnoreCase) > 0)
+                    {
+                        Zdarzenie temp = list[j];
+                        list[j] = list[j + 1];
+                        list[j + 1] = temp;
+
+                        swapped = true;
+                    }
+                }
+
+                // if no swap, list already sorted
+                if (!swapped)
+                    break;
+            }
+        }
+
+        private void SortByTitleBubble()
+        {
+            if (currentView == null || currentView.Count == 0)
+                return;
+
+            BubbleSortByTitle(currentView);
+
+            dgvEvents.DataSource = null;
+            dgvEvents.DataSource = currentView;
+
+            ClearSortGlyphs();
+            UpdateRowColors();      // zachowuje kolory
+        }
+
+        // ********************************************************** Legacy bubble Sort **********************************************************
+
         // ********************************************************** Date colors **********************************************************
         private DateTime GetEventEndDateTime(Zdarzenie e)
         {
@@ -802,7 +863,31 @@ namespace Kalendarz_zdarzen_kulturalnych
             ApplySearch();
         }
 
-        // ********************************************************** Search button **********************************************************
+        
 
+        // ********************************************************** Search button **********************************************************
+        
+        // Zachowanie przy wyjściu 
+        
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (isSaved)
+                return;
+
+            DialogResult result = MessageBox.Show(
+                "Save table?",
+                "Confirm exit",
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                SaveToCsv("data.csv");
+            }
+            else if (result == DialogResult.Cancel)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }
