@@ -33,7 +33,6 @@ namespace Kalendarz_zdarzen_kulturalnych
             DateStart.ForeColor = Color.Gray;
             DateEnd.Text = "YYYY/MM/DD";
             DateEnd.ForeColor = Color.Gray;
-            SwitchEvent();
             dgvEvents.AutoGenerateColumns = false;
 
             // Generacja columnow
@@ -195,10 +194,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             }
 
             LoadFromCsv(ofd.FileName);
-            RefreshGrid();
-            RefreshFilterOptions();
-            ClearSortGlyphs();
-            UpdateRowColors();
+            Clear_Datagrid();
         }
 
         private void LoadFromCsv(string fileName)
@@ -244,10 +240,7 @@ namespace Kalendarz_zdarzen_kulturalnych
                 LoadFromCsv(fileName);
                 allEvents = events.ToList();
                 currentView = allEvents.ToList();
-                RefreshGrid();
-                RefreshFilterOptions();
-                ClearSortGlyphs();
-                UpdateRowColors();
+                Clear_Datagrid();
             }
             catch (Exception ex)
             {
@@ -285,35 +278,12 @@ namespace Kalendarz_zdarzen_kulturalnych
 
         private void Upcoming_Events_Click(object sender, EventArgs e)
         {
-            Event_Up = true;
-            SwitchEvent();
+            
         }
 
         private void Past_Events_Click(object sender, EventArgs e)
         {
-            Event_Up = false;
-            SwitchEvent();
-        }
-        private void SwitchEvent()
-        {
-            if (Event_Up==true)
-            {
-                Upcoming_Events.BackColor = Color.WhiteSmoke;
-                Past_Events.BackColor = Color.DodgerBlue;
-                Upcoming_Events.ForeColor = Color.Black ;
-                Past_Events.ForeColor = Color.White;
-                Upcoming_Events.Enabled = false;
-                Past_Events.Enabled = true;
-            }
-            else
-            {
-                Upcoming_Events.BackColor = Color.DodgerBlue;
-                Past_Events.BackColor = Color.WhiteSmoke;
-                Upcoming_Events.ForeColor = Color.White;
-                Past_Events.ForeColor = Color.Black;
-                Past_Events.Enabled = false;
-                Upcoming_Events.Enabled = true;
-            }
+            
         }
 
         private void Import_Click(object sender, EventArgs e)
@@ -329,10 +299,7 @@ namespace Kalendarz_zdarzen_kulturalnych
                 if (f2.ShowDialog() == DialogResult.OK)
                 {
                     events.Add(f2.NewEvent);
-                    RefreshGrid();
-                    RefreshFilterOptions();
-                    ClearSortGlyphs();
-                    UpdateRowColors();
+                    Clear_Datagrid();
                 }
             }
         }
@@ -347,11 +314,19 @@ namespace Kalendarz_zdarzen_kulturalnych
             dgvEvents.DataSource = events;
             currentView = allEvents.ToList();
         }
-
+        private void Clear_Datagrid()
+        {
+            RefreshGrid();
+            RefreshFilterOptions();
+            ClearSortGlyphs();
+            UpdateRowColors();
+            monthCalendar1.Visible = false;
+            monthCalendar2.Visible = false;
+        }
         /// <summary>
         /// ////////////////////////////////Update/////////////////////////////////
         /// </summary>
- 
+
         private void Check_day_Click(object sender, EventArgs e)
         {
             if (dgvEvents.SelectedRows.Count == 0)
@@ -400,9 +375,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             {
                 Zdarzenie selected = dgvEvents.SelectedRows[0].DataBoundItem as Zdarzenie;
                 events.Remove(selected);
-                RefreshGrid();
-                RefreshFilterOptions();
-                //ClearSortGlyphs();
+                Clear_Datagrid();
             }
         }
 
@@ -473,10 +446,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             {
                 if (f2.ShowDialog() == DialogResult.OK)
                 {
-                    RefreshGrid();
-                    RefreshFilterOptions();
-                    ClearSortGlyphs();
-                    UpdateRowColors();
+                    Clear_Datagrid();
                 }
             }
         }
@@ -567,6 +537,7 @@ namespace Kalendarz_zdarzen_kulturalnych
         {
             DateStart.Clear();
             DateEnd.Clear();
+            txtSearch.Clear();
 
             for (int i = 0; i < clbType.Items.Count; i++)
                 clbType.SetItemChecked(i, false);
@@ -794,7 +765,48 @@ namespace Kalendarz_zdarzen_kulturalnych
                 }
             }
         }
-
         // ********************************************************** Date colors **********************************************************
+
+        // ********************************************************** Search button **********************************************************
+        private void ApplySearch()
+        {
+            string query = txtSearch.Text.Trim();
+
+            IEnumerable<Zdarzenie> result = currentView ?? allEvents;
+
+            if (!string.IsNullOrEmpty(query))
+            {
+                result = result.Where(e =>
+                    !string.IsNullOrEmpty(e.Title) &&
+                    e.Title.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+
+            currentView = result.ToList();
+
+            dgvEvents.DataSource = null;
+            dgvEvents.DataSource = currentView;
+
+            UpdateRowColors();
+        }
+
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ApplySearch();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            Clear_Datagrid();
+            ApplySearch();
+        }
+
+        // ********************************************************** Search button **********************************************************
+
     }
 }
