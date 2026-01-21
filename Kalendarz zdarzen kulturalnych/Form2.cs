@@ -129,7 +129,18 @@ namespace Kalendarz_zdarzen_kulturalnych
 
         private void Description_TextChanged(object sender, EventArgs e)
         {
+            var box = sender as RichTextBox;
+            if (box == null)
+                return;
 
+            if (box.Text.Contains("\n") || box.Text.Contains("\r"))
+            {
+                int cursorPos = box.SelectionStart;
+
+                box.Text = box.Text.Replace("\r", "").Replace("\n", "");
+
+                box.SelectionStart = Math.Min(cursorPos - 1, box.Text.Length);
+            }
         }
 
         private void txtTimeEnd_TextChanged(object sender, EventArgs e)
@@ -248,6 +259,14 @@ namespace Kalendarz_zdarzen_kulturalnych
         private void textBox7_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void Description_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                e.Handled = true;  // blokuje Enter
+            }
         }
     }
 }

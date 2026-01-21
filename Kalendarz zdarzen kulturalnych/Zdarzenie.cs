@@ -28,7 +28,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             Tags = new List<string>();
         }
 
-        // 👇 Helper property ONLY for DataGridView
+        // Helper
         public string DateTimeDisplay =>
             $"{Date:yyyy-MM-dd} {TimeStart}–{TimeEnd}";
     }
