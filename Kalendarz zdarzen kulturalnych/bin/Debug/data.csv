@@ -1,6 +1,23 @@
 Id;Title;Date;TimeStart;TimeEnd;Location;Type;Cost;Description;Tags
-1;afaf;2026-01-16;10:00;12:00;tfyy;c6u;10;hzrsmyzsrysrjhraj;dt6uid
-2;fhdh;2026-01-16;11:00;13:00;fjjx;kgcuk;50,00;;cugk,dhtdh
-3;llaguna;2026-01-07;10:30;11:00;lhlllllll1;vvli;40;pollol;a,b,c,d,f,g,h
-4;la;2026-01-30;10:00;12:00;kil;syj;70;ggagea;dyj,hrsd,hrdh
-6;la;2026-02-07;10:00;14:00;fjjx;po;10;jlgkgk;a,b,c
+1;Koncert jazzowy;2026-02-05;18:00;20:00;Filharmonia;Muzyka;50;Wieczorny koncert jazzowy;muzyka,jazz,koncert
+2;Wystawa malarstwa;2026-02-06;10:00;17:00;Galeria Sztuki;Wystawa;20;Wystawa współczesnego malarstwa;sztuka,wystawa,obrazy
+3;Spektakl teatralny;2026-02-07;19:00;21:30;Teatr Miejski;Teatr;60;Klasyczny spektakl dramatyczny;teatr,dramat,sztuka
+4;Warsztaty ceramiczne;2026-02-08;09:00;13:00;Dom Kultury;Warsztaty;30;Warsztaty tworzenia ceramiki;rękodzieło,warsztaty,sztuka
+5;Pokaz filmowy;2026-02-09;17:00;19:00;Kino Centrum;Film;25;Pokaz filmu niezależnego;film,kino,pokaz
+6;Spotkanie autorskie;2026-02-10;16:00;18:00;Biblioteka;Literatura;0;Spotkanie z pisarzem;książki,literatura,autor
+7;Festiwal muzyczny;2026-02-11;14:00;23:00;Rynek Główny;Festiwal;120;Całodniowy festiwal muzyczny;muzyka,festiwal,plener
+8;Wykład historyczny;2026-02-12;09:00;12:30;Uniwersytet;Wykład;0;Wykład o historii regionu;historia,edukacja,wykład
+9;Koncert rockowy;2026-02-13;19:00;22:00;Hala Sportowa;Muzyka;80;Energetyczny koncert rockowy;rock,muzyka,koncert
+10;Targi książki;2026-02-14;10:00;18:00;Centrum Expo;Targi;15;Coroczne targi książki;książki,targi,literatura
+11;Plener fotograficzny;2026-02-15;08:00;12:00;Park Miejski;Fotografia;0;Plener fotograficzny dla amatorów;fotografia,plener,sztuka
+12;Warsztaty taneczne;2026-02-16;17:00;20:00;Studio Tańca;Taniec;40;Warsztaty tańca współczesnego;taniec,warsztaty,ruch
+13;Pokaz baletowy;2026-02-17;18:30;20:30;Opera;Balet;90;Wieczorny pokaz baletowy;balet,taniec,sztuka
+14;Debata społeczna;2026-02-18;15:00;17:00;Centrum Dialogu;Debata;0;Debata na temat kultury;społeczeństwo,dyskusja,kultura
+15;Warsztaty kulinarne;2026-02-19;12:00;15:00;Akademia Smaku;Warsztaty;70;Warsztaty kuchni regionalnej;kulinaria,warsztaty,jedzenie
+16;Koncert klasyczny;2026-02-20;19:00;21:00;Sala Koncertowa;Muzyka;100;Koncert muzyki klasycznej;klasyka,muzyka,koncert
+17;Pokaz mody;2026-02-21;16:00;18:30;Centrum Handlowe;Moda;0;Pokaz lokalnych projektantów;moda,pokaz,styl
+18;Wernisaż;2026-02-22;18:00;20:00;Galeria Sztuki;Wernisaż;0;Otwarcie nowej wystawy;wernisaż,sztuka,galeria
+19;Spotkanie klubowe;2026-02-23;17:00;19:00;Klub Kultury;Spotkanie;10;Spotkanie klubu miłośników sztuki;spotkanie,klub,kultura
+20;Festiwal filmowy;2026-02-24;11:00;22:00;Kino Studyjne;Festiwal;150;Festiwal filmów europejskich;film,festiwal,kino
+21;Festiwal;2026-01-01;10:00;12:00;Polska;Festiwal;0;Alala;Fest
+22;Wystawa;2026-02-09;18:00;20:00;Polska;Wystawa;40;lol;balet,autor
