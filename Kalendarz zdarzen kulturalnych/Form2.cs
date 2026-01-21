@@ -31,7 +31,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             txt_Cost.TextChanged += (s, e) => ValidateForm();
             Description.TextChanged += (s, e) => ValidateForm();
         }
-  
+        // //////////////////////////////// Button Add event
         private void Newevent_Click(object sender, EventArgs e)
         {
             if (editingEvent == null)
@@ -49,7 +49,8 @@ namespace Kalendarz_zdarzen_kulturalnych
             DialogResult = DialogResult.OK;
             Close();
         }
-
+        // //////////////////////////////// Button Add event
+        // //////////////////////////////// Kalendarze
         private void textBox7_Click(object sender, EventArgs e)
         {
             monthCalendar1.Visible = true;
@@ -85,7 +86,8 @@ namespace Kalendarz_zdarzen_kulturalnych
                 txtTime.SelectionStart = txtTime.Text.Length;
             }
         }
-
+        // //////////////////////////////// Kalendarze
+        // //////////////////////////////// Czas
         private void txtTime_Validating(object sender, CancelEventArgs e)
         {
             string input = txtTime.Text;
@@ -114,35 +116,11 @@ namespace Kalendarz_zdarzen_kulturalnych
                 txtTime.Focus();
             }
         }
-
-
-
+        
         private void txtTime_KeyDown(object sender, KeyEventArgs e)
         {
             isDeleting = e.KeyCode == Keys.Back;
         }
-
-        private void Form2_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Description_TextChanged(object sender, EventArgs e)
-        {
-            var box = sender as RichTextBox;
-            if (box == null)
-                return;
-
-            if (box.Text.Contains("\n") || box.Text.Contains("\r"))
-            {
-                int cursorPos = box.SelectionStart;
-
-                box.Text = box.Text.Replace("\r", "").Replace("\n", "");
-
-                box.SelectionStart = Math.Min(cursorPos - 1, box.Text.Length);
-            }
-        }
-
         private void txtTimeEnd_TextChanged(object sender, EventArgs e)
         {
             if (isDeleting) return;
@@ -191,12 +169,39 @@ namespace Kalendarz_zdarzen_kulturalnych
             }
         }
 
+        // //////////////////////////////// Czas
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+
+        }
+        // //////////////////////////////// Inne
+        private void Description_TextChanged(object sender, EventArgs e)
+        {
+            var box = sender as RichTextBox;
+            if (box == null)
+                return;
+
+            if (box.Text.Contains("\n") || box.Text.Contains("\r"))
+            {
+                int cursorPos = box.SelectionStart;
+
+                box.Text = box.Text.Replace("\r", "").Replace("\n", "");
+
+                box.SelectionStart = Math.Min(cursorPos - 1, box.Text.Length);
+            }
+        }
+
+        // //////////////////////////////// Inne
+
+        
+        // //////////////////////////////// tryb EDYCJI
         public Form2(Zdarzenie ev) : this()
         {
             editingEvent = ev;
             LoadEventForEdit();
         }
-
+        
         private void LoadEventForEdit()
         {
             Event_title.Text = editingEvent.Title;
@@ -232,7 +237,9 @@ namespace Kalendarz_zdarzen_kulturalnych
         {
             this.Close();
         }
+        // //////////////////////////////// tryb EDYCJI
 
+        // //////////////////////////////// Inne
         private void ValidateForm()
         {
             Newevent.Enabled =
@@ -245,7 +252,7 @@ namespace Kalendarz_zdarzen_kulturalnych
                 !string.IsNullOrWhiteSpace(txt_Cost.Text) &&
                 !string.IsNullOrWhiteSpace(Description.Text);
         }
-
+       
         private void txt_Cost_TextChanged(object sender, EventArgs e)
         {
             decimal cost;
@@ -268,5 +275,6 @@ namespace Kalendarz_zdarzen_kulturalnych
                 e.Handled = true;  // blokuje Enter
             }
         }
+        // //////////////////////////////// Inne
     }
 }

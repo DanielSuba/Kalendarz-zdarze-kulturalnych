@@ -28,6 +28,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             LoadEvent();
         }
 
+        // //////////////////////////////// Exsport day txt
         private void Export_day_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog
@@ -58,12 +59,12 @@ namespace Kalendarz_zdarzen_kulturalnych
 
             MessageBox.Show("Event exported successfully.");
         }
-
+        // //////////////////////////////// Exsport day txt
         private void Edit_Event_Click(object sender, EventArgs e)
         {
 
         }
-
+        // //////////////////////////////// Delete event
         private void Delete_Event_Click(object sender, EventArgs e)
         {
             var result = MessageBox.Show(
@@ -81,7 +82,9 @@ namespace Kalendarz_zdarzen_kulturalnych
 
             this.Close();
         }
+        // //////////////////////////////// Delete event
 
+        // //////////////////////////////// Ladowanie danych
         private void LoadEvent()
         {
             Title_texbox.Text = currentEvent.Title;
@@ -93,7 +96,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             Tags_texbox.Text = string.Join(", ", currentEvent.Tags);
             Description_texbox.Text = currentEvent.Description;
         }
-
+        // //////////////////////////////// Ladowanie danych
         private void Title_texbox_TextChanged(object sender, EventArgs e)
         {
 

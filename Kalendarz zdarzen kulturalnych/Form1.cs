@@ -16,12 +16,13 @@ namespace Kalendarz_zdarzen_kulturalnych
         public bool Event_Up=true;
         
         private List<Zdarzenie> events = new List<Zdarzenie>(); // Origin
-        private List<Zdarzenie> allEvents = new List<Zdarzenie>(); // Filtrowane
-        private List<Zdarzenie> currentView = new List<Zdarzenie>(); //Sortwanie
+        private List<Zdarzenie> allEvents = new List<Zdarzenie>(); // Origin 2
+        private List<Zdarzenie> currentView = new List<Zdarzenie>(); //Filtrowane i Sortwanie
 
         private int currentSortColumnIndex = -1;
         private bool sortAscending = true;
         private bool isSaved = false;
+        // ********************************************************** Poczatek **********************************************************
         public Form1()
         {
             InitializeComponent();
@@ -87,8 +88,9 @@ namespace Kalendarz_zdarzen_kulturalnych
             monthCalendar2.Visible = false;
 
         }
+        // ********************************************************** Poczatek **********************************************************
 
-        
+        // ********************************************************** Date **********************************************************
         private void textBox6_Enter(object sender, EventArgs e)
         {
             monthCalendar1.Location = new Point(DateStart.Left, DateStart.Bottom);
@@ -122,9 +124,100 @@ namespace Kalendarz_zdarzen_kulturalnych
                 DateEnd.ForeColor = Color.Black;
             }
         }
+        private void textBox7_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(DateEnd.Text))
+            {
+                DateEnd.Text = "YYYY/MM/DD";
+                DateEnd.ForeColor = Color.Gray;
+            }
+        }
+        
+        private void Add_event_Click(object sender, EventArgs e)
+        {
+            using (Form2 f2 = new Form2())
+            {
+                if (f2.ShowDialog() == DialogResult.OK)
+                {
+                    events.Add(f2.NewEvent);
+                    Clear_Datagrid();
+                }
+            }
+        }
+        private void DateStart_TextChanged(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = true;
+            monthCalendar1.BringToFront();
+        }
+
+        private void DateEnd_TextChanged(object sender, EventArgs e)
+        {
+            monthCalendar2.Visible = true;
+            monthCalendar2.BringToFront();
+        }
+
+        
+
+        private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            DateStart.Text = e.Start.ToString("yyyy-MM-dd");
+            monthCalendar1.Visible = false;
+        }
+
+        private void monthCalendar2_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            DateEnd.Text = e.Start.ToString("yyyy-MM-dd");
+            monthCalendar2.Visible = false;
+        }
+        private void Form1_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = false;
+            monthCalendar2.Visible = false;
+        } 
+        private void monthCalendar1_Leave(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = false;
+        }
+
+        private void monthCalendar2_Leave(object sender, EventArgs e)
+        {
+            monthCalendar2.Visible = false;
+        }
+
+        private void DateStart_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = true;
+            monthCalendar2.Visible = false;
+        }
+
+        private void DateEnd_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = false;
+            monthCalendar2.Visible = true;
+        }
+        private void Form1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (!DateStart.Bounds.Contains(e.Location) && !monthCalendar1.Bounds.Contains(e.Location))
+            {
+                monthCalendar1.Visible = false;
+            }
+
+            if (!DateEnd.Bounds.Contains(e.Location) && !monthCalendar2.Bounds.Contains(e.Location))
+            {
+                monthCalendar2.Visible = false;
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = false;
+            monthCalendar2.Visible = false;
+        }
+        // ********************************************************** Date **********************************************************
 
         // ********************************************************** CSV **********************************************************
 
+        // ((((((((((((((( skroty klawiszowe
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             //Save
@@ -149,7 +242,7 @@ namespace Kalendarz_zdarzen_kulturalnych
 
             return base.ProcessCmdKey(ref msg, keyData);
         }
-
+        // ((((((((((((((( Save
         private void SaveToCsv(string fileName)
         {
             using (StreamWriter sw = new StreamWriter(fileName))
@@ -178,6 +271,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             return $"backup{i}.csv";
         }
 
+        // ((((((((((((((( Load backup
         private void LoadFromCsvWithBackup()
         {
             OpenFileDialog ofd = new OpenFileDialog
@@ -199,7 +293,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             LoadFromCsv(ofd.FileName);
             Clear_Datagrid();
         }
-
+        // ((((((((((((((( Wczytanie danych
         private void LoadFromCsv(string fileName)
         {
             events.Clear();
@@ -230,7 +324,7 @@ namespace Kalendarz_zdarzen_kulturalnych
                 events.Add(ev);
             }
         }
-
+        // (((((((((((((((  Wczytanie danych na poczatku
         private void LoadDataOnStartup()
         {
             string fileName = "data.csv";
@@ -268,29 +362,10 @@ namespace Kalendarz_zdarzen_kulturalnych
         }
         // ********************************************************** CSV **********************************************************
 
-        private void textBox7_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(DateEnd.Text))
-            {
-                DateEnd.Text = "YYYY/MM/DD";
-                DateEnd.ForeColor = Color.Gray;
-            }
-        }
         
-        private void Add_event_Click(object sender, EventArgs e)
-        {
-            using (Form2 f2 = new Form2())
-            {
-                if (f2.ShowDialog() == DialogResult.OK)
-                {
-                    events.Add(f2.NewEvent);
-                    Clear_Datagrid();
-                }
-            }
-        }
 
         /// <summary>
-        /// ////////////////////////////////Update/////////////////////////////////
+        /// ////////////////////////////////Update datagrid///////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         /// </summary>
         public void RefreshGrid()
         {
@@ -310,7 +385,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             isSaved = false;
         }
         /// <summary>
-        /// ////////////////////////////////Update/////////////////////////////////
+        /// ////////////////////////////////Update///////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         /// </summary>
 
         private void Check_day_Click(object sender, EventArgs e)
@@ -406,6 +481,7 @@ namespace Kalendarz_zdarzen_kulturalnych
 
         // ********************************************************** Export event TXT **********************************************************
 
+        // Button
         private void Export_day_Click(object sender, EventArgs e)
         {
             if (dgvEvents.SelectedRows.Count == 0)
@@ -441,7 +517,7 @@ namespace Kalendarz_zdarzen_kulturalnych
                 sw.WriteLine($"Tags: {string.Join(", ", ev.Tags)}");
             }
         }
-
+        // Button dla Edycji
         private void Edit_Event_Click(object sender, EventArgs e)
         {
             if (dgvEvents.SelectedRows.Count == 0)
@@ -464,44 +540,12 @@ namespace Kalendarz_zdarzen_kulturalnych
 
         // ********************************************************** Export event TXT **********************************************************
         
-        // text box date
-        private void DateStart_TextChanged(object sender, EventArgs e)
-        {
-            monthCalendar1.Visible = true;
-            monthCalendar1.BringToFront();
-        }
-
-        private void DateEnd_TextChanged(object sender, EventArgs e)
-        {
-            monthCalendar2.Visible = true;
-            monthCalendar2.BringToFront();
-        }
-
-        
-
-        private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
-        {
-            DateStart.Text = e.Start.ToString("yyyy-MM-dd");
-            monthCalendar1.Visible = false;
-        }
-
-        private void monthCalendar2_DateSelected(object sender, DateRangeEventArgs e)
-        {
-            DateEnd.Text = e.Start.ToString("yyyy-MM-dd");
-            monthCalendar2.Visible = false;
-        }
-        private void Form1_Click(object sender, EventArgs e)
-        {
-            monthCalendar1.Visible = false;
-            monthCalendar2.Visible = false;
-        }
-
-        // text box date
         // ********************************************************** Filters **********************************************************
 
-
+        // Funkcja dla tworzenia odfiltrowanej tabeli
         private void ApplyDateFilter()
         {
+            // Otrzymanie danych
             DateTime from, to;
             bool hasFrom = DateTime.TryParse(DateStart.Text, out from);
             bool hasTo = DateTime.TryParse(DateEnd.Text, out to);
@@ -532,6 +576,7 @@ namespace Kalendarz_zdarzen_kulturalnych
                 filtered = filtered.Where(e =>
                     e.Tags.Any(tag => selectedTags.Contains(tag)));
 
+            // Odnowienie danych
             dgvEvents.DataSource = null;
             dgvEvents.DataSource = filtered.ToList();
             currentView = filtered.ToList();
@@ -566,47 +611,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             Clear_Datagrid();
         }
 
-        private void monthCalendar1_Leave(object sender, EventArgs e)
-        {
-            monthCalendar1.Visible = false;
-        }
-
-        private void monthCalendar2_Leave(object sender, EventArgs e)
-        {
-            monthCalendar2.Visible = false;
-        }
-
-        private void DateStart_Click(object sender, EventArgs e)
-        {
-            monthCalendar1.Visible = true;
-            monthCalendar2.Visible = false;
-        }
-
-        private void DateEnd_Click(object sender, EventArgs e)
-        {
-            monthCalendar1.Visible = false;
-            monthCalendar2.Visible = true;
-        }
-
-        private void Form1_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (!DateStart.Bounds.Contains(e.Location) && !monthCalendar1.Bounds.Contains(e.Location))
-            {
-                monthCalendar1.Visible = false;
-            }
-
-            if (!DateEnd.Bounds.Contains(e.Location) && !monthCalendar2.Bounds.Contains(e.Location))
-            {
-                monthCalendar2.Visible = false;
-            }
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            monthCalendar1.Visible = false;
-            monthCalendar2.Visible = false;
-        }
-
+        // Funkcja dla czyszczenia filtrow
         private void RefreshFilterOptions()
         {
             clbType.Items.Clear();
@@ -691,6 +696,7 @@ namespace Kalendarz_zdarzen_kulturalnych
                 ? currentView.OrderBy(keySelector).ToList()
                 : currentView.OrderByDescending(keySelector).ToList();
 
+            // Odnowienie danych
             dgvEvents.DataSource = null;
             dgvEvents.DataSource = currentView;
 
@@ -736,7 +742,7 @@ namespace Kalendarz_zdarzen_kulturalnych
                     }
                 }
 
-                // if no swap, list already sorted
+                // if no swap, list already sorted (Optymizacja)
                 if (!swapped)
                     break;
             }
@@ -780,6 +786,7 @@ namespace Kalendarz_zdarzen_kulturalnych
 
         private void UpdateRowColors()
         {
+            // Jezeli tablicy nie ma
             if (dgvEvents.Rows.Count == 0)
                 return;
 
@@ -792,6 +799,7 @@ namespace Kalendarz_zdarzen_kulturalnych
             foreach (DataGridViewRow row in dgvEvents.Rows)
                 row.DefaultCellStyle.BackColor = Color.White;
 
+            // Czerwone (Juz bylo)
             for (int i = 0; i < view.Count; i++)
             {
                 if (GetEventEndDateTime(view[i]) < now)
@@ -800,6 +808,7 @@ namespace Kalendarz_zdarzen_kulturalnych
                 }
             }
 
+            // Zolte (Time collide)
             for (int i = 0; i < view.Count; i++)
             {
                 if (GetEventEndDateTime(view[i]) < now)
